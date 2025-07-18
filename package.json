@@ -10,7 +10,10 @@
 		"prepare": "husky",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-		"lint": "eslint ."
+		"lint": "eslint .",
+		"lint:fix": "eslint . --fix",
+		"type-check": "svelte-check --tsconfig ./tsconfig.json",
+		"check:all": "npm run lint && npm run type-check"
 	},
 	"devDependencies": {
 		"@eslint/compat": "^1.2.5",
@@ -30,6 +33,7 @@
 		"vite": "^7.0.4"
 	},
 	"dependencies": {
-		"@inlang/paraglide-js": "^2.0.0"
+		"@inlang/paraglide-js": "^2.0.0",
+		"@types/node": "^24.0.14"
 	}
 }

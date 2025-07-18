@@ -1,0 +1,4 @@
+{
+  "*.{js,ts}": ["eslint --fix"],
+  "*.svelte": ["eslint --fix", "svelte-check --tsconfig ./tsconfig.json"]
+}
