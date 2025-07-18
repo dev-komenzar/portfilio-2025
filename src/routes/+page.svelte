@@ -1,29 +1,18 @@
 <script lang="ts">
-  // Placeholder for translations
-  const home = {
-    title: 'ポートフォリオ',
-    subtitle: 'フロントエンド開発者',
-    description: 'SvelteKit、React、TypeScriptを使用して美しく機能的なWebアプリケーションを作成します。',
-    cta: 'プロジェクトを見る',
-    sections: {
-      projects: 'プロジェクト',
-      skills: 'スキル',
-      contact: 'お問い合わせ'
-    }
-  };
+  import { m } from '$lib/paraglide/messages';
 </script>
 
 <svelte:head>
-  <title>{home.title}</title>
-  <meta name="description" content={home.description} />
+  <title>{m.hero_title()}</title>
+  <meta name="description" content={m.hero_description()} />
 </svelte:head>
 
 <section id="hero" class="hero-section">
   <div class="container hero-container">
     <div class="hero-content">
-      <h1 class="hero-title">{home.title}</h1>
-      <h2 class="hero-subtitle">{home.subtitle}</h2>
-      <p class="hero-description">{home.description}</p>
+      <h1 class="hero-title">{m.hero_title()}</h1>
+      <h2 class="hero-subtitle">{m.hero_subtitle()}</h2>
+      <p class="hero-description">{m.hero_description()}</p>
       <div class="hero-actions">
         <a href="#projects" class="hero-button primary" onclick={(e) => {
           e.preventDefault();
@@ -32,7 +21,7 @@
             projectsSection.scrollIntoView({ behavior: 'smooth' });
             history.pushState(null, '', '#projects');
           }
-        }}>{home.cta}</a>
+        }}>{m.hero_cta()}</a>
       </div>
     </div>
   </div>
@@ -40,21 +29,21 @@
 
 <section id="projects" class="section projects-section">
   <div class="container">
-    <h2 class="section-title">{home.sections.projects}</h2>
+    <h2 class="section-title">{m.sections_projects()}</h2>
     <p>プロジェクト一覧がここに表示されます。</p>
   </div>
 </section>
 
 <section id="skills" class="section skills-section">
   <div class="container">
-    <h2 class="section-title">{home.sections.skills}</h2>
+    <h2 class="section-title">{m.sections_skills()}</h2>
     <p>スキル一覧がここに表示されます。</p>
   </div>
 </section>
 
 <section id="contact" class="section contact-section">
   <div class="container">
-    <h2 class="section-title">{home.sections.contact}</h2>
+    <h2 class="section-title">{m.sections_contact()}</h2>
     <p>お問い合わせフォームがここに表示されます。</p>
   </div>
 </section>

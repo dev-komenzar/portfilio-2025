@@ -334,27 +334,40 @@ Paraglide.jsが自動的にルーティングを処理：
 - 言語切り替え時のURL変換処理
 
 ### メッセージキー構造
+Paraglide.jsはネストしたJSONをサポートしていないため、フラットな構造を使用します：
+
 ```json
 {
-  "nav": {
-    "home": "ホーム",
-    "projects": "プロジェクト",
-    "skills": "スキル"
-  },
-  "hero": {
-    "title": "フロントエンド開発者",
-    "subtitle": "美しく機能的なWebアプリケーションを作成します"
-  },
-  "projects": {
-    "title": "プロジェクト",
-    "viewAll": "すべて見る",
-    "viewDemo": "デモを見る",
-    "viewCode": "コードを見る"
-  },
-  "skills": {
-    "title": "スキル",
-    "experience": "{years}年の経験"
-  }
+  "nav_home": "ホーム",
+  "nav_projects": "プロジェクト",
+  "nav_skills": "スキル",
+  "nav_contact": "お問い合わせ",
+  
+  "hero_title": "フロントエンド開発者",
+  "hero_subtitle": "美しく機能的なWebアプリケーションを作成します",
+  "hero_description": "SvelteKit、React、TypeScriptを使用して美しく機能的なWebアプリケーションを作成します。",
+  "hero_cta": "プロジェクトを見る",
+  
+  "sections_projects": "プロジェクト",
+  "sections_skills": "スキル",
+  "sections_contact": "お問い合わせ",
+  "sections_viewAll": "すべて見る",
+  
+  "project_title": "プロジェクト詳細",
+  "project_notFound": "プロジェクトが見つかりません。",
+  "project_backToProjects": "プロジェクト一覧に戻る",
+  "project_viewDemo": "デモを見る",
+  "project_viewCode": "コードを見る",
+  "project_viewSite": "サイトを見る",
+  
+  "footer_copyright": "© {year} Portfolio",
+  "footer_rights": "All rights reserved.",
+  "footer_links_github": "GitHub",
+  "footer_links_twitter": "Twitter",
+  "footer_links_linkedin": "LinkedIn",
+  
+  "language_switchTo": "Switch to English / 日本語に切り替える",
+  "language_current": "English / 日本語"
 }
 ```
 

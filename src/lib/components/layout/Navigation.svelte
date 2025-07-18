@@ -1,13 +1,14 @@
 <script lang="ts">
+  import { m } from '$lib/paraglide/messages';
   import { observeSections, scrollToSection } from '$lib/utils/scrollUtils';
   import { onMount } from 'svelte';
   
   // Define the sections that will be tracked using $props()
   const { sections = [
-    { id: 'hero', label: 'ホーム' },
-    { id: 'projects', label: 'プロジェクト' },
-    { id: 'skills', label: 'スキル' },
-    { id: 'contact', label: 'お問い合わせ' }
+    { id: 'hero', label: m.nav_home() },
+    { id: 'projects', label: m.nav_projects() },
+    { id: 'skills', label: m.nav_skills() },
+    { id: 'contact', label: m.nav_contact() }
   ] } = $props();
   
   // Current active section
@@ -30,7 +31,7 @@
     const sectionIds = sections.map(section => section.id);
     
     // Set up observers for sections
-    const cleanup = observeSections(sectionIds, (sectionId) => {
+    const cleanup = observeSections(sectionIds, (sectionId: string) => {
       // Update active section
       activeSection = sectionId;
       

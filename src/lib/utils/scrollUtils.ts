@@ -72,7 +72,7 @@ export function getCurrentSection(sectionIds: string[], offset: string = '-50% 0
  */
 export function observeSections(
   sectionIds: string[], 
-  callback: (sectionId: string) => void,
+  callback: (_sectionId: string) => void,
   offset: string = '-50% 0px'
 ): () => void {
   const observers: IntersectionObserver[] = [];
@@ -90,6 +90,7 @@ export function observeSections(
       const observer = new IntersectionObserver(entries => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
+            // Pass the section ID to the callback when it becomes visible
             callback(id);
           }
         });

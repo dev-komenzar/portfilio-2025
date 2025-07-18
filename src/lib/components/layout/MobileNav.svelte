@@ -1,13 +1,14 @@
 <script lang="ts">
+  import { m } from '$lib/paraglide/messages';
   import { scrollToSection } from '$lib/utils/scrollUtils';
   
   // Define props using $props()
   const {
     sections = [
-      { id: 'hero', label: 'ホーム' },
-      { id: 'projects', label: 'プロジェクト' },
-      { id: 'skills', label: 'スキル' },
-      { id: 'contact', label: 'お問い合わせ' }
+      { id: 'hero', label: m.nav_home() },
+      { id: 'projects', label: m.nav_projects() },
+      { id: 'skills', label: m.nav_skills() },
+      { id: 'contact', label: m.nav_contact() }
     ],
     activeSection: propActiveSection = 'hero',
     isOpen: propIsOpen = false

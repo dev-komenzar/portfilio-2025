@@ -1,33 +1,23 @@
 <script lang="ts">
-  import { page } from '$app/stores';
+  import { m } from '$lib/paraglide/messages';
   import { observeSections } from '$lib/utils/scrollUtils';
   import { onMount } from 'svelte';
+  import LanguageSwitcher from './LanguageSwitcher.svelte';
   import MobileNav from './MobileNav.svelte';
-  
-  // Import language switcher component later when implemented
-  // import LanguageSwitcher from './LanguageSwitcher.svelte';
-  
-  // Placeholder for translations until we implement the language system
-  const nav = {
-    home: 'ホーム',
-    projects: 'プロジェクト',
-    skills: 'スキル',
-    contact: 'お問い合わせ'
-  };
   
   // Navigation sections
   const sections = [
-    { id: 'hero', label: nav.home },
-    { id: 'projects', label: nav.projects },
-    { id: 'skills', label: nav.skills },
-    { id: 'contact', label: nav.contact }
+    { id: 'hero', label: m.nav_home() },
+    { id: 'projects', label: m.nav_projects() },
+    { id: 'skills', label: m.nav_skills() },
+    { id: 'contact', label: m.nav_contact() }
   ];
   
   // Current active section
   let activeSection = $state('hero');
   
   // Check if we're on the home page
-  const isHomePage = $derived($page.url.pathname === '/');
+  let isHomePage = $state(false);
   
   // Mobile menu state
   let isMenuOpen = $state(false);
@@ -44,6 +34,11 @@
   
   // Set up section observers when on home page
   onMount(() => {
+    // Check if we're on the home page
+    isHomePage = window.location.pathname === '/' || 
+                window.location.pathname === '/en/' || 
+                window.location.pathname === '/ja/';
+                
     if (isHomePage) {
       const sectionIds = sections.map(section => section.id);
       return observeSections(sectionIds, (sectionId) => {
@@ -67,7 +62,7 @@
       // Scroll to element
       const headerOffset = 80; // Adjust based on your header height
       const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+      const offsetPosition = elementPosition + window.scrollY - headerOffset;
       
       window.scrollTo({
         top: offsetPosition,
@@ -105,7 +100,7 @@
             class="nav-link" 
             onclick={(e) => isHomePage && handleNavClick(e, "hero")}
           >
-            {nav.home}
+            {m.nav_home()}
           </a>
         </li>
         <li class="nav-item">
@@ -114,7 +109,7 @@
             class="nav-link"
             onclick={(e) => isHomePage && handleNavClick(e, "projects")}
           >
-            {nav.projects}
+            {m.nav_projects()}
           </a>
         </li>
         <li class="nav-item">
@@ -123,7 +118,7 @@
             class="nav-link"
             onclick={(e) => isHomePage && handleNavClick(e, "skills")}
           >
-            {nav.skills}
+            {m.nav_skills()}
           </a>
         </li>
         <li class="nav-item">
@@ -132,14 +127,14 @@
             class="nav-link"
             onclick={(e) => isHomePage && handleNavClick(e, "contact")}
           >
-            {nav.contact}
+            {m.nav_contact()}
           </a>
         </li>
       </ul>
       
-      <!-- Language switcher will be added here -->
+      <!-- Language switcher -->
       <div class="language-switcher-placeholder">
-        <!-- <LanguageSwitcher /> -->
+        <LanguageSwitcher />
       </div>
     </nav>
     

@@ -1,6 +1,7 @@
 import { includeIgnoreFile } from '@eslint/compat';
 import js from '@eslint/js';
 import svelte from 'eslint-plugin-svelte';
+import { globalIgnores } from 'eslint/config';
 import globals from 'globals';
 import { fileURLToPath } from 'node:url';
 import ts from 'typescript-eslint';
@@ -15,6 +16,9 @@ const gitignorePath = fileURLToPath(new URL('./.gitignore', import.meta.url));
  */
 export default ts.config(
 	includeIgnoreFile(gitignorePath),
+	globalIgnores([
+		"src/paraglide/"
+	]),
 	js.configs.recommended,
 	...ts.configs.recommended,
 	...svelte.configs['flat/recommended'],
@@ -30,7 +34,7 @@ export default ts.config(
 			// see: https://typescript-eslint.io/troubleshooting/faqs/eslint/#i-get-errors-from-the-no-undef-rule-about-global-variables-not-being-defined-even-though-there-are-no-typescript-errors
 			"no-undef": 'off',
 			// Additional rules for code quality
-			"no-unused-vars": "warn",
+			"no-unused-vars": ["warn",{"argsIgnorePattern": "^_"}],
 			"prefer-const": "error",
 			"no-console": ["warn", { allow: ["warn", "error"] }]
 		}

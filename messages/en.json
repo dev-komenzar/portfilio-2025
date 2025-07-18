@@ -1,4 +1,34 @@
 {
 	"$schema": "https://inlang.com/schema/inlang-message-format",
-	"hello_world": "Hello, {name} from en!"
+	"hello_world": "Hello, {name} from en!",
+	"nav_home": "Home",
+	"nav_projects": "Projects",
+	"nav_skills": "Skills",
+	"nav_contact": "Contact",
+	
+	"hero_title": "Portfolio",
+	"hero_subtitle": "Frontend Developer",
+	"hero_description": "Creating beautiful and functional web applications using SvelteKit, React, and TypeScript.",
+	"hero_cta": "View Projects",
+	
+	"sections_projects": "Projects",
+	"sections_skills": "Skills",
+	"sections_contact": "Contact",
+	"sections_viewAll": "View All",
+	
+	"project_title": "Project Details",
+	"project_notFound": "Project not found.",
+	"project_backToProjects": "Back to Projects",
+	"project_viewDemo": "View Demo",
+	"project_viewCode": "View Code",
+	"project_viewSite": "Visit Site",
+	
+	"footer_copyright": "© {year} Portfolio",
+	"footer_rights": "All rights reserved.",
+	"footer_links_github": "GitHub",
+	"footer_links_twitter": "Twitter",
+	"footer_links_linkedin": "LinkedIn",
+	
+	"language_switchTo": "日本語に切り替える",
+	"language_current": "English"
 }
