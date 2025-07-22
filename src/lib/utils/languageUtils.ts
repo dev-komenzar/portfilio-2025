@@ -65,6 +65,15 @@ export function initializeLanguage(): void {
     return;
   }
   
+  // Check if URL already has a language prefix
+  const pathname = window.location.pathname;
+  if (pathname.startsWith('/en/') || pathname === '/en') {
+    // URL indicates English preference
+    setLocale('en', { reload: false });
+    localStorage.setItem('preferred-language', 'en');
+    return;
+  }
+  
   // Otherwise detect from browser
   const detectedLocale = detectBrowserLanguage();
   setLocale(detectedLocale, { reload: false });

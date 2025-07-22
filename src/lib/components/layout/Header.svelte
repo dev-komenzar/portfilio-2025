@@ -4,6 +4,7 @@
   import { onMount } from 'svelte';
   import LanguageSwitcher from './LanguageSwitcher.svelte';
   import MobileNav from './MobileNav.svelte';
+  import ThemeToggle from './ThemeToggle.svelte';
   
   // Navigation sections
   const sections = [
@@ -132,9 +133,16 @@
         </li>
       </ul>
       
-      <!-- Language switcher -->
-      <div class="language-switcher-placeholder">
-        <LanguageSwitcher />
+      <div class="header-actions">
+        <!-- Theme Toggle -->
+        <div class="theme-toggle-placeholder">
+          <ThemeToggle />
+        </div>
+        
+        <!-- Language switcher -->
+        <div class="language-switcher-placeholder">
+          <LanguageSwitcher />
+        </div>
       </div>
     </nav>
     
@@ -284,8 +292,16 @@
     width: 100%;
   }
   
-  .language-switcher-placeholder {
+  .header-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-4);
     margin-top: var(--space-8);
+  }
+  
+  .theme-toggle-placeholder {
+    margin-bottom: var(--space-2);
   }
   
   .overlay {
@@ -324,9 +340,15 @@
       font-size: var(--text-base);
     }
     
-    .language-switcher-placeholder {
+    .header-actions {
+      flex-direction: row;
       margin-top: 0;
       margin-left: var(--space-6);
+    }
+    
+    .theme-toggle-placeholder {
+      margin-bottom: 0;
+      margin-right: var(--space-4);
     }
     
     .overlay {

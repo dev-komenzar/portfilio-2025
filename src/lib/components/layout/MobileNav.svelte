@@ -1,6 +1,7 @@
 <script lang="ts">
   import { m } from '$lib/paraglide/messages';
   import { scrollToSection } from '$lib/utils/scrollUtils';
+  import ThemeToggle from './ThemeToggle.svelte';
   
   // Define props using $props()
   const {
@@ -49,6 +50,12 @@
       </li>
     {/each}
   </ul>
+  
+  <div class="mobile-nav-actions">
+    <div class="mobile-theme-toggle">
+      <ThemeToggle />
+    </div>
+  </div>
 </div>
 
 <style>
@@ -109,6 +116,19 @@
   
   .mobile-nav-link:hover {
     background-color: var(--color-surface-elevated);
+  }
+  
+  .mobile-nav-actions {
+    display: flex;
+    justify-content: center;
+    padding: var(--space-4) var(--space-6);
+    border-top: 1px solid var(--color-border);
+    margin-top: var(--space-4);
+  }
+  
+  .mobile-theme-toggle {
+    display: flex;
+    justify-content: center;
   }
   
   /* Hide on desktop */

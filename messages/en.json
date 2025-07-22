@@ -30,5 +30,8 @@
 	"footer_links_linkedin": "LinkedIn",
 	
 	"language_switchTo": "日本語に切り替える",
-	"language_current": "English"
+	"language_current": "English",
+	
+	"theme_toggle_light": "Switch to light mode",
+	"theme_toggle_dark": "Switch to dark mode"
 }
