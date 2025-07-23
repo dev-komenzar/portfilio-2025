@@ -7,6 +7,7 @@ SvelteKit + TypeScript + Paraglide.js を使用した静的サイト生成によ
 ## アーキテクチャ
 
 ### 技術スタック
+
 - **フレームワーク**: SvelteKit 2.x + Svelte 5.x
 - **言語**: TypeScript
 - **国際化**: Paraglide.js (@inlang/paraglide-js)
@@ -15,6 +16,7 @@ SvelteKit + TypeScript + Paraglide.js を使用した静的サイト生成によ
 - **ビルドツール**: Vite
 
 ### アーキテクチャパターン
+
 - **ページベースルーティング**: SvelteKitの標準ルーティング
 - **コンポーネント指向**: 再利用可能なUIコンポーネント
 - **Svelteベースデータ管理**: プロジェクトデータをSvelteコンポーネントで管理
@@ -23,6 +25,7 @@ SvelteKit + TypeScript + Paraglide.js を使用した静的サイト生成によ
 ## コンポーネントとインターフェース
 
 ### ページ構造
+
 ```
 src/routes/
 ├── +layout.svelte          # 共通レイアウト
@@ -37,6 +40,7 @@ src/routes/
 ### 主要コンポーネント
 
 #### 1. レイアウトコンポーネント
+
 - `Header.svelte`: ナビゲーション + 言語切り替え
 - `Footer.svelte`: フッター情報
 - `Navigation.svelte`: スクロール連動ナビゲーション
@@ -45,11 +49,13 @@ src/routes/
   - セクション間の自動ハイライト切り替え
 
 #### 2. セクションコンポーネント
+
 - `HeroSection.svelte`: ヒーローセクション
 - `ProjectsSection.svelte`: プロジェクト一覧セクション
 - `SkillsSection.svelte`: スキル紹介セクション
 
 #### 3. UIコンポーネント
+
 - `ProjectCard.svelte`: プロジェクトカード
 - `SkillCard.svelte`: スキルカード
 - `Modal.svelte`: モーダルダイアログ
@@ -57,6 +63,7 @@ src/routes/
 - `LanguageSwitcher.svelte`: 言語切り替えボタン
 
 #### 4. ユーティリティコンポーネント
+
 - `SEO.svelte`: メタタグ管理
 - `LoadingSpinner.svelte`: ローディング表示
 - `ImageOptimized.svelte`: 最適化された画像表示
@@ -64,6 +71,7 @@ src/routes/
 ## データモデル
 
 ### プロジェクトデータ構造
+
 ```typescript
 // src/lib/types/project.ts
 export interface ProjectMetadata {
@@ -102,6 +110,7 @@ declare module '*.svelte' {
 ```
 
 ### スキルデータ構造
+
 ```typescript
 interface Skill {
   id: string;
@@ -121,55 +130,57 @@ interface SkillCategory {
 }
 ```
 
-
-
 ## データ管理
 
-### Svelteベースプロジェクトデータ
+### マークダウンベースプロジェクトデータ
+
 ```
 src/lib/projects/
-├── ProjectEcommerce.svelte     # ECサイトプロジェクト
-├── ProjectPortfolio.svelte     # ポートフォリオプロジェクト
-├── ProjectMobile.svelte        # モバイルアプリプロジェクト
-└── index.ts                    # プロジェクト一覧エクスポート
+├── My10kDay.md            # Webアプリ My 10k Day
+├── ProjectPortfolio.md    # ポートフォリオプロジェクト
+├── HodojiWeb.md           # 寳幢寺サイト
+└── index.ts                   # プロジェクト一覧エクスポート
 ```
 
 ### プロジェクトファイル構造例
-```svelte
-<!-- src/lib/projects/ProjectEcommerce.svelte -->
-<script lang="ts">
-  import heroImage from '$lib/assets/projects/ecommerce-hero.webp';
-  import gallery1 from '$lib/assets/projects/ecommerce-1.webp';
-  import gallery2 from '$lib/assets/projects/ecommerce-2.webp';
-  
-  export const metadata = {
-    id: 'ecommerce-site',
-    title: { ja: 'ECサイト構築', en: 'E-commerce Site' },
-    shortDescription: { 
-      ja: 'モダンなECサイトの構築', 
-      en: 'Modern e-commerce website development' 
-    },
-    technologies: ['SvelteKit', 'Stripe', 'Supabase'],
-    images: {
-      thumbnail: heroImage,
-      gallery: [gallery1, gallery2]
-    },
-    links: {
-      demo: 'https://demo.example.com',
-      github: 'https://github.com/user/project'
-    },
-    featured: true,
-    order: 1
-  };
-</script>
 
-<div class="project-content">
-  <img src={heroImage} alt="ECサイトのメイン画像" />
-  <p>プロジェクトの詳細説明...</p>
-</div>
+```markdown
+<!-- src/lib/projects/My10kDay.md -->
+---
+id: 'my-10k-day'
+title: 
+  ja: 'My 10k Day',
+  en: 'My 10k Day',
+shortDescription:
+  ja: 'Svelteを用いたモダンなwebアプリの構築',
+  en: "Modern web app development with Svelte",
+description:
+  ja: "SvelteKitで構築した、モダンなwebアプリケーションです。多言語対応、動的なOGP生成機能を備えています。ユーザーが生まれてから1万日目を計算し、さらにじぶんの歴史を振り返ることができるツールです。セルフホストのCoolifyを使用してデプロイしています。",
+  en: "A modern web application built with SvelteKit. It supports multiple languages and dynamic OGP generation. Users can calculate their 10000th day after birth and reflect on their personal history. It is deployed using self-hosted Coolify.",
+technologies:
+  - "SvelteKit"
+  -  "TypeScript"
+  - "TailwindCSS"
+  - "Coolify"
+startDate: "2025-07-01",
+endDate: undefined,
+images:
+  thumbnail: "static/projects/my-10k-day/2025-07-22 17.18.20 10k.kamodigi.work 760a3ad2e19e.png"
+  gallery:
+    - "static/projects/my-10k-day/2025-07-22 17.16.56 10k.kamodigi.work 25a802c6b514.png"
+    - "static/projects/my-10k-day/2025-07-22 17.18.36 10k.kamodigi.work 41e585b0d7ec.png"
+    - "static/projects/my-10k-day/2025-07-22 17.18.59 10k.kamodigi.work a43143937714.png"
+links:
+  demo: "https://10k.kamodigi.work"
+order: 1
+---
+
+<h1>コンテンツ</h1>
+本文はここに書く。
 ```
 
 ### 静的データファイル
+
 ```
 src/lib/data/
 ├── skills.json            # スキルデータ
@@ -177,11 +188,12 @@ src/lib/data/
 ```
 
 ### データアクセス層
+
 ```typescript
 // src/lib/projects/index.ts
-import ProjectEcommerce from './ProjectEcommerce.svelte';
-import ProjectPortfolio from './ProjectPortfolio.svelte';
-import ProjectMobile from './ProjectMobile.svelte';
+import ProjectEcommerce from './ProjectEcommerce.md';
+import ProjectPortfolio from './ProjectPortfolio.md';
+import ProjectMobile from './ProjectMobile.md';
 
 const projectComponents = [
   ProjectEcommerce,
@@ -208,6 +220,7 @@ export const getProjectComponent = (slug: string) => {
 ```
 
 ### Svelteベースデータ管理の利点
+
 - **画像の直接インポート**: Viteによる自動最適化
 - **型安全性**: TypeScriptによる完全な型チェック
 - **コンポーネント化**: プロジェクト詳細のリッチなコンテンツ
@@ -217,13 +230,16 @@ export const getProjectComponent = (slug: string) => {
 ## スタイリング設計
 
 ### デザインコンセプト
+
 参考サイト（sameerasw.com, tonkotsu.ai）を基にした現代的なポートフォリオデザイン：
+
 - **ミニマリズム**: 洗練されたシンプルなレイアウト
 - **ダークファースト**: ダークテーマを主体とした設計
 - **インタラクティブ**: ホバーエフェクトとスムーズなアニメーション
 - **モダンタイポグラフィ**: 大胆で読みやすいフォント使用
 
 ### CSS設計方針
+
 - **CSS Variables**: テーマとカラーパレット管理
 - **BEM記法**: クラス命名規則
 - **モバイルファースト**: レスポンシブデザイン
@@ -231,6 +247,7 @@ export const getProjectComponent = (slug: string) => {
 - **アニメーション**: CSS TransitionsとKeyframes活用
 
 ### カラーパレット
+
 ```css
 :root {
   /* Dark theme (primary) */
@@ -265,6 +282,7 @@ export const getProjectComponent = (slug: string) => {
 ```
 
 ### タイポグラフィ
+
 ```css
 :root {
   /* Font families */
@@ -286,6 +304,7 @@ export const getProjectComponent = (slug: string) => {
 ```
 
 ### アニメーション設計
+
 ```css
 :root {
   /* Transitions */
@@ -300,6 +319,7 @@ export const getProjectComponent = (slug: string) => {
 ```
 
 ### レスポンシブブレークポイント
+
 ```css
 /* Mobile: 320px - 767px */
 /* Tablet: 768px - 1023px */
@@ -310,12 +330,15 @@ export const getProjectComponent = (slug: string) => {
 ## 国際化設計
 
 ### ルーティング戦略
+
 Paraglide.jsが自動的にルーティングを処理：
+
 - **日本語（標準）**: `/` - ルートパス（baseLocale）
 - **英語**: `/en` - 言語コードプレフィックス
 - **その他言語**: `/{lang}` - 言語コードプレフィックス
 
 ### URL構造例
+
 ```
 日本語（標準）:
 / (ホーム)
@@ -329,11 +352,13 @@ Paraglide.jsが自動的にルーティングを処理：
 ```
 
 ### Paraglide.js設定
+
 - `baseLocale: "ja"` - 日本語を標準言語として設定
 - 自動言語検出とリダイレクト
 - 言語切り替え時のURL変換処理
 
 ### メッセージキー構造
+
 Paraglide.jsはネストしたJSONをサポートしていないため、フラットな構造を使用します：
 
 ```json
@@ -374,12 +399,14 @@ Paraglide.jsはネストしたJSONをサポートしていないため、フラ�
 ## エラーハンドリング
 
 ### エラー処理戦略
+
 1. **404エラー**: カスタム404ページ
 2. **画像読み込みエラー**: フォールバック画像表示
 3. **フォーム送信エラー**: ユーザーフレンドリーなエラーメッセージ
 4. **データ読み込みエラー**: グレースフルデグラデーション
 
 ### エラーページ
+
 ```
 src/routes/
 ├── +error.svelte           # 汎用エラーページ
@@ -389,17 +416,20 @@ src/routes/
 ## パフォーマンス最適化
 
 ### 画像最適化
+
 - WebP形式の使用
 - レスポンシブ画像（srcset）
 - 遅延読み込み（lazy loading）
 - 画像圧縮
 
 ### コード分割
+
 - ページレベルでの自動コード分割
 - 動的インポートによるコンポーネント分割
 - 重要でないCSSの遅延読み込み
 
 ### SEO最適化
+
 - メタタグの動的生成
 - 構造化データ（JSON-LD）
 - サイトマップ生成
@@ -408,11 +438,13 @@ src/routes/
 ## デプロイメント設計
 
 ### Coolifyホスティング対応
+
 - **Dockerfile**: 静的サイト用のマルチステージビルド
 - **Nginx**: 静的ファイル配信とルーティング設定
 - **Docker最適化**: レイヤーキャッシュとイメージサイズ最適化
 
 ### Dockerfile仕様
+
 - **ベースイメージ**: node:22-alpine（最新安定版）
 - **マルチステージビルド**: ビルドステージと実行ステージの分離
 - **キャッシュ最適化**: 依存関係のレイヤーキャッシュ
@@ -422,6 +454,7 @@ src/routes/
 - **設定**: SPA対応のNginx設定
 
 ### Nginx設定
+
 - SPA用のフォールバック設定
 - 静的アセットのキャッシュ設定
 - Gzip圧縮の有効化
@@ -430,12 +463,14 @@ src/routes/
 ## テスト戦略
 
 ### テスト種別
+
 1. **単体テスト**: コンポーネントとユーティリティ関数
 2. **統合テスト**: ページレベルの機能テスト
 3. **E2Eテスト**: 主要ユーザーフローのテスト
 4. **アクセシビリティテスト**: WCAG準拠チェック
 
 ### テストツール
+
 - **単体テスト**: Bun Test + @testing-library/svelte
 - **E2Eテスト**: Playwright
 - **アクセシビリティ**: axe-core
@@ -444,6 +479,7 @@ src/routes/
 ## 開発ワークフロー
 
 ### ESLint設定（SvelteKitベストプラクティス）
+
 - **Flat Config**: eslint.config.js使用
 - **プラグイン構成**:
   - `@eslint/js`: 基本JavaScript規則
@@ -455,14 +491,16 @@ src/routes/
 - **フォーマット規則**: ESLintでコードスタイルも管理
 
 ### Git フック設定
+
 - **Husky**: Git フック管理
 - **lint-staged**: ステージされたファイルのみ処理
-- **プレコミットフック**: 
+- **プレコミットフック**:
   - ESLint実行（自動修正）
   - TypeScript型チェック
   - Svelte Check実行
 
 ### 品質管理スクリプト
+
 ```json
 {
   "scripts": {
@@ -475,6 +513,7 @@ src/routes/
 ```
 
 ### ESLint設定例
+
 ```javascript
 // eslint.config.js
 import js from '@eslint/js';
@@ -509,12 +548,14 @@ export default typescript.config(
 ## セキュリティ考慮事項
 
 ### 静的サイトセキュリティ
+
 - CSP（Content Security Policy）設定
 - XSS対策（入力値のサニタイズ）
 - 外部リンクのrel="noopener noreferrer"
 - HTTPS強制
 
 ### フォームセキュリティ
+
 - クライアントサイド検証
 - レート制限（将来的にサーバーサイド実装時）
 - スパム対策（reCAPTCHA等の検討）
