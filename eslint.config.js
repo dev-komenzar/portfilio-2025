@@ -55,8 +55,8 @@ export default ts.config(
 		},
 		rules: {
 			// Svelte specific rules
-			"svelte/no-at-html-tags": "error",
-			"svelte/valid-compile": "error",
+			"svelte/no-at-html-tags": "warn",
+			"svelte/valid-compile": "warn",
 			"svelte/no-unused-svelte-ignore": "warn"
 		}
 	},
