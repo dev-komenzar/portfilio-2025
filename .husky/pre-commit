@@ -4,7 +4,5 @@ if find ./src -type f \( -name "*.test.*" -o -name "*_test_*" -o -name "*.spec.*
 fi
 
 # Run lint-staged to check and fix staged files
+# Defined in `.lintstagedrc.json`
 npx lint-staged
-
-# Run TypeScript type checking
-bun run check
