@@ -1,0 +1,140 @@
+import type { ProjectData, ProjectFilterOptions, ProjectMetadata, ProjectSortOption } from '$lib/types/project';
+import { unified } from 'unified';
+import type { Root, RootContent } from 'mdast';
+import type { Literal } from 'unist';
+import type { VFile } from 'vfile';
+import remarkParse from 'remark-parse';
+import remarkFrontmatter from 'remark-frontmatter';
+import remarkRehype from 'remark-rehype';
+import rehypeStringify from 'rehype-stringify';
+import * as yaml from 'js-yaml';
+import { visit } from 'unist-util-visit';
+
+/**
+ * Custom remark plugin to extract and parse frontmatter.
+ * Stores the parsed metadata in vfile.data.frontmatter.
+ */
+function remarkExtractFrontmatter() {
+  return (tree: Root, file: VFile) => {
+    visit(tree, 'yaml', (node: Literal) => {
+      try {
+        file.data.frontmatter = yaml.load(node.value as string);
+      } catch (e) {
+        console.error('Failed to parse frontmatter:', e);
+        file.data.frontmatter = {};
+      }
+      // Remove the yaml node so it's not processed further by remark-rehype
+      tree.children = tree.children.filter((child: RootContent) => child !== node);
+    });
+  };
+}
+
+/**
+ * マークダウンファイルからプロジェクトデータを解析する関数
+ * 
+ * @param markdown マークダウンファイルの内容
+ * @returns 解析されたプロジェクトデータ
+ */
+export async function parseProjectMarkdown(markdown: string): Promise<ProjectData> {
+  const file = await unified()
+    .use(remarkParse)
+    .use(remarkFrontmatter, ['yaml'])
+    .use(remarkExtractFrontmatter)
+    .use(remarkRehype)
+    .use(rehypeStringify)
+    .process(markdown);
+
+  const metadata = (file.data.frontmatter || {}) as Record<string, any>;
+  const content = String(file);
+
+  // ProjectMetadataの型に合わせる
+  const projectMetadata: ProjectMetadata = {
+    id: metadata.id || '',
+    title: metadata.title || { ja: '', en: '' },
+    description: metadata.description || { ja: '', en: '' },
+    shortDescription: metadata.shortDescription || { ja: '', en: '' },
+    technologies: metadata.technologies || [],
+    category: metadata.category || 'web',
+    status: metadata.status || 'completed',
+    startDate: metadata.startDate || '',
+    endDate: metadata.endDate,
+    images: {
+      thumbnail: metadata.images?.thumbnail || '',
+      gallery: metadata.images?.gallery || []
+    },
+    links: {
+      demo: metadata.links?.demo,
+      github: metadata.links?.github,
+      website: metadata.links?.website
+    },
+    featured: metadata.featured || false,
+    order: metadata.order || 0
+  };
+  
+  return { metadata: projectMetadata, content };
+}
+
+/**
+ * プロジェクトをソートする関数
+ * 
+ * @param projects ソートするプロジェクトの配列
+ * @param sortOption ソートオプション
+ * @returns ソートされたプロジェクトの配列
+ */
+export function sortProjects(
+  projects: ProjectData[], 
+  sortOption: ProjectSortOption = 'newest'
+): ProjectData[] {
+  return [...projects].sort((a, b) => {
+    switch (sortOption) {
+      case 'newest':
+        return new Date(b.metadata.startDate).getTime() - new Date(a.metadata.startDate).getTime();
+      case 'oldest':
+        return new Date(a.metadata.startDate).getTime() - new Date(b.metadata.startDate).getTime();
+      case 'name-asc':
+        return a.metadata.title.ja.localeCompare(b.metadata.title.ja);
+      case 'name-desc':
+        return b.metadata.title.ja.localeCompare(a.metadata.title.ja);
+      default:
+        return a.metadata.order - b.metadata.order;
+    }
+  });
+}
+
+/**
+ * プロジェクトをフィルタリングする関数
+ * 
+ * @param projects フィルタリングするプロジェクトの配列
+ * @param options フィルタリングオプション
+ * @returns フィルタリングされたプロジェクトの配列
+ */
+export function filterProjects(
+  projects: ProjectData[],
+  options?: ProjectFilterOptions
+): ProjectData[] {
+  if (!options) return projects;
+  
+  return projects.filter(project => {
+    // カテゴリでフィルタリング
+    if (options.category && project.metadata.category !== options.category) {
+      return false;
+    }
+    
+    // ステータスでフィルタリング
+    if (options.status && project.metadata.status !== options.status) {
+      return false;
+    }
+    
+    // 特集プロジェクトのみを表示
+    if (options.featuredOnly && !project.metadata.featured) {
+      return false;
+    }
+    
+    // 技術でフィルタリング
+    if (options.technology && !project.metadata.technologies.includes(options.technology)) {
+      return false;
+    }
+    
+    return true;
+  });
+}
