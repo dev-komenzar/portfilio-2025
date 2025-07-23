@@ -80,7 +80,6 @@ export interface ProjectMetadata {
   description: Record<'ja' | 'en', string>;
   shortDescription: Record<'ja' | 'en', string>;
   technologies: string[];
-  category: 'web' | 'mobile' | 'desktop' | 'other';
   status: 'completed' | 'in-progress' | 'archived';
   startDate: string;
   endDate?: string;
@@ -136,10 +135,11 @@ interface SkillCategory {
 
 ```
 src/lib/projects/
-├── My10kDay.md            # Webアプリ My 10k Day
-├── ProjectPortfolio.md    # ポートフォリオプロジェクト
-├── HodojiWeb.md           # 寳幢寺サイト
-└── index.ts                   # プロジェクト一覧エクスポート
+├── index.ts                   # プロジェクト一覧エクスポート
+└── md/
+  ├── My10kDay.md            # Webアプリ My 10k Day
+  ├── ProjectPortfolio.md    # ポートフォリオプロジェクト
+  ├── HodojiWeb.md           # 寳幢寺サイト
 ```
 
 ### プロジェクトファイル構造例
@@ -189,43 +189,12 @@ src/lib/data/
 
 ### データアクセス層
 
-```typescript
-// src/lib/projects/index.ts
-import ProjectEcommerce from './ProjectEcommerce.md';
-import ProjectPortfolio from './ProjectPortfolio.md';
-import ProjectMobile from './ProjectMobile.md';
-
-const projectComponents = [
-  ProjectEcommerce,
-  ProjectPortfolio,
-  ProjectMobile
-];
-
-export const getProjects = () => {
-  return projectComponents.map(component => component.metadata);
-};
-
-export const getFeaturedProjects = () => {
-  return getProjects().filter(project => project.featured);
-};
-
-export const getProjectBySlug = (slug: string) => {
-  return getProjects().find(project => project.id === slug) || null;
-};
-
-export const getProjectComponent = (slug: string) => {
-  const index = getProjects().findIndex(project => project.id === slug);
-  return index !== -1 ? projectComponents[index] : null;
-};
-```
-
-### Svelteベースデータ管理の利点
-
-- **画像の直接インポート**: Viteによる自動最適化
-- **型安全性**: TypeScriptによる完全な型チェック
-- **コンポーネント化**: プロジェクト詳細のリッチなコンテンツ
-- **ホットリロード**: 開発時の即座な反映
-- **バンドル最適化**: 未使用画像の自動除外
+- ファイル: src/lib/projects/index.ts
+- src/lib/projects/md 以下のマークダウンファイルを利用する
+- マークダウンのパーサーにunifiedを利用する
+- getProjects: 全てのプロジェクトを取得する
+- getFeaturedProjects
+- getProjectsBySlug
 
 ## スタイリング設計
 
