@@ -7,7 +7,7 @@ shortDescription:
   ja: '現代社会に仏教思想を実装する実験寺院のサイト'
   en: 'The official website of Hodoji Temple conveys the challenge of how Buddhism is implemented in modern society'
 description:
-  ja: '寳幢寺の公式ウェブサイトは、仏教を現代日本にどう実装するかというチャレンジを、現代的なウェブデザインを伝えています。訪問者が寺院のイベント、アクセス方法などの情報を簡単に見つけられるよう設計されています。レスポンシブデザインにより、あらゆるデバイスで最適な表示が可能です。'
+  ja: '寳幢寺の公式ウェブサイトは、仏教を現代日本にどう実装するかというチャレンジを、モダンなウェブデザインを伝えています。訪問者が寺院のイベント、アクセス方法などの情報を簡単に見つけられるよう設計されています。レスポンシブデザインにより、あらゆるデバイスで最適な表示が可能です。'
   en: 'The official website of Hodoji Temple conveys the challenge of how Buddhism is implemented in modern Japan through modern web design. It is designed to allow visitors to easily find information such as temple events and access methods. Responsive design ensures optimal display on all devices.'
 technologies:
   - 'Next.js'
@@ -22,16 +22,12 @@ images:
     - 'static/projects/hodoji-web/pic2.png'
     - 'static/projects/hodoji-web/pic3.png'
 links:
-  demo: 'https://hodoji.example.com'
-  github: 'https://github.com/username/hodoji-web'
-  website: 'https://hodoji.example.com'
+  demo: 'https://samgha.org'
 featured: true
-order: 1
+order: 11
 ---
 
-# 寳幢寺ウェブサイト
-
-寳幢寺の公式ウェブサイトは、仏教を現代日本にどう実装するかというチャレンジを、現代的なウェブデザインを伝えています。訪問者が寺院のイベント、アクセス方法などの情報を簡単に見つけられるよう設計されています。レスポンシブデザインにより、あらゆるデバイスで最適な表示が可能です。
+寳幢寺公式ウェブサイトは、仏教を現代日本にどう実装するかというチャレンジを、現代的なウェブデザインを伝えています。訪問者が寺院のイベント、アクセス方法などの情報を簡単に見つけられるよう設計されています。レスポンシブデザインにより、あらゆるデバイスで最適な表示が可能です。
 
 ## 主な機能
 
@@ -44,10 +40,9 @@ order: 1
 
 このプロジェクトは以下のステップで開発されました：
 
-1. 要件定義とユーザーリサーチ
-2. 情報アーキテクチャの設計
-3. ワイヤーフレームとデザインモックアップの作成
-4. Next.jsを使用したフロントエンド開発
+1. 要件定義とユーザーリサーチ：形式ばったものではなく、僧侶やスタッフの方々、お寺に集う人たちと何回もおしゃべりしながら「この寺でやりたいことをどう伝えるか」を練りました。
+2. デザインモックアップの作成
+3. Next.jsを使用したフロントエンド開発
 
 ## パフォーマンス最適化
 
