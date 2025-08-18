@@ -52,12 +52,11 @@ src/routes/
 
 - `HeroSection.svelte`: ヒーローセクション
 - `ProjectsSection.svelte`: プロジェクト一覧セクション
-- `SkillsSection.svelte`: スキル紹介セクション
+- `AboutMe.svelte`: 自己紹介セクション
 
 #### 3. UIコンポーネント
 
 - `ProjectCard.svelte`: プロジェクトカード
-- `SkillCard.svelte`: スキルカード
 - `Modal.svelte`: モーダルダイアログ
 - `Button.svelte`: 再利用可能ボタン
 - `LanguageSwitcher.svelte`: 言語切り替えボタン
@@ -95,38 +94,6 @@ export interface ProjectMetadata {
   featured: boolean;
   order: number;
 }
-
-// Svelteコンポーネントの型定義
-declare module '*.svelte' {
-  import type { SvelteComponent } from 'svelte';
-  import type { ProjectMetadata } from '$lib/types/project';
-  
-  // Svelteコンポーネントにmetadataプロパティを追加
-  export default class extends SvelteComponent {
-    metadata: ProjectMetadata;
-  }
-}
-```
-
-### スキルデータ構造
-
-```typescript
-interface Skill {
-  id: string;
-  name: string;
-  category: 'frontend' | 'backend' | 'mobile' | 'tools' | 'other';
-  level: 1 | 2 | 3 | 4 | 5; // 1: 初級, 5: エキスパート
-  experience: string; // "2年" など
-  icon?: string;
-  description?: Record<'ja' | 'en', string>;
-}
-
-interface SkillCategory {
-  id: string;
-  name: Record<'ja' | 'en', string>;
-  skills: Skill[];
-  order: number;
-}
 ```
 
 ## データ管理
@@ -138,7 +105,7 @@ src/lib/projects/
 ├── index.ts                   # プロジェクト一覧エクスポート
 └── md/
   ├── My10kDay.md            # Webアプリ My 10k Day
-  ├── ProjectPortfolio.md    # ポートフォリオプロジェクト
+  ├── Portfolio.md           # ポートフォリオ
   ├── HodojiWeb.md           # 寳幢寺サイト
 ```
 
@@ -177,14 +144,6 @@ order: 1
 
 <h1>コンテンツ</h1>
 本文はここに書く。
-```
-
-### 静的データファイル
-
-```
-src/lib/data/
-├── skills.json            # スキルデータ
-└── profile.json           # プロフィール情報
 ```
 
 ### データアクセス層
@@ -334,7 +293,6 @@ Paraglide.jsはネストしたJSONをサポートしていないため、フラ�
 {
   "nav_home": "ホーム",
   "nav_projects": "プロジェクト",
-  "nav_skills": "スキル",
   "nav_contact": "お問い合わせ",
   
   "hero_title": "フロントエンド開発者",
@@ -343,7 +301,6 @@ Paraglide.jsはネストしたJSONをサポートしていないため、フラ�
   "hero_cta": "プロジェクトを見る",
   
   "sections_projects": "プロジェクト",
-  "sections_skills": "スキル",
   "sections_contact": "お問い合わせ",
   "sections_viewAll": "すべて見る",
   
