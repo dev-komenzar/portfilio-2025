@@ -186,21 +186,28 @@ Svelteコンポーネント、ユーティリティ関数、型定義など、�
 カラーパレット
 
 - Primary color:
-  - soft: #A2D2E2
-  - DEFAULT: #6BB392
-  - dark: #48864D
+  - soft: #A2D2E2 oklch(85.7% 0.13 211.7)
+  - DEFAULT: #6BB392 oklch(69.2% 0.15 151.2)
+  - dark: #48864D oklch(54.7% 0.13 143.2)
 - Accent color:
-  - DEFAULT: #F08437
-  - soft: #FBCA5A
-  - pale: #BBB3D8
+  - DEFAULT: #F08437 oklch(75.6% 0.19 56.2)
+  - soft: #FBCA5A oklch(87.2% 0.19 86.6)
+  - pale: #BBB3D8 oklch(80.2% 0.07 306.2)
 - Neutral color:
-  - dark: #080808
-  - DEFAULT: #414143
-  - soft: #757578
-  - light: #B4B4B7
-  - pale: #D8D8D8
-  - verypale: #F1F1F4
-  - white: #FFFFFF
+  - dark: #080808 oklch(10.7% 0.01 260.0)
+  - DEFAULT: #414143 oklch(32.6% 0.01 260.0)
+  - soft: #757578 oklch(49.8% 0.01 260.0)
+  - light: #B4B4B7 oklch(75.2% 0.01 260.0)
+  - pale: #D8D8D8 oklch(87.7% 0.01 260.0)
+  - verypale: #F1F1F4 oklch(97.2% 0.01 260.0)
+  - white: #FFFFFF oklch(100% 0 0)
+
+グローバルCSS
+
+`src/lib/styles/global.css, variables.css`に記述する。
+
+
+
 
 ## アクセシビリティ
 
