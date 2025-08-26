@@ -17,7 +17,7 @@ body {
   background-color: var(--color-background);
   color: var(--color-text);
   line-height: 1.5;
-  min-height: 100vh;
+  min-height: 100lvh;
   display: flex;
   flex-direction: column;
 }
@@ -29,7 +29,7 @@ a {
 }
 
 a:hover {
-  color: var(--color-secondary);
+  color: var(--color-primary-dark);
 }
 
 img {
@@ -98,20 +98,4 @@ img {
 /* Main content area */
 main {
   flex: 1;
-}
-
-/* Skip to content link for accessibility */
-.skip-to-content {
-  position: absolute;
-  top: -40px;
-  left: 0;
-  background: var(--color-primary);
-  color: white;
-  padding: 8px;
-  z-index: 100;
-  transition: top 0.3s;
-}
-
-.skip-to-content:focus {
-  top: 0;
 }
