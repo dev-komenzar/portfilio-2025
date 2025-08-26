@@ -94,8 +94,3 @@ img {
     display: none !important;
   }
 }
-
-/* Main content area */
-main {
-  flex: 1;
-}
