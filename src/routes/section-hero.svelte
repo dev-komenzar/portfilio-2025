@@ -1,4 +1,5 @@
 <script lang="ts">
+	import ThreeShader from "$lib/components/ui/three/ThreeShader.svelte";
 	import { m } from "$lib/paraglide/messages";
 </script>
 
@@ -8,6 +9,7 @@
 			<h1 class="hero-title">{m.hero_title()}</h1>
 		</div>
 	</div>
+	<ThreeShader />
 </section>
 
 <style>
@@ -24,6 +26,7 @@
 		align-items: center;
 		justify-content: center;
 		text-align: center;
+		z-index: 1;
 	}
 
 	.hero-content {
