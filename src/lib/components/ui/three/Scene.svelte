@@ -58,24 +58,7 @@
 	const gridHelperSize = 100;
 	const gridHelperDivisions = 10;
 
-	// Deggugging
-	const { camera } = useThrelte();
 	onMount(() => {
-		// Optional: カメラの位置や向きを変更する場合
-		// @ts-expect-error: manualy manupulate camera object
-		camera.current.right = camRight;
-		// @ts-expect-error: manualy manupulate camera object
-		camera.current.left = camLeft;
-		// @ts-expect-error: manualy manupulate camera object
-		camera.current.top = camTop;
-		// @ts-expect-error: manualy manupulate camera object
-		camera.current.bottom = camBottom;
-		camera.current.lookAt(0, 0, 0);
-		// @ts-expect-error: manualy manupulate camera object
-		camera.current.zoom = 1;
-		// @ts-expect-error: manualy manupulate camera object
-		camera.current.updateProjectionMatrix();
-
 		// Canvasにクリックイベントを登録
 		canvas.addEventListener("pointerdown", onPointerDown);
 	});
@@ -90,7 +73,19 @@
 	args={[gridHelperSize, gridHelperDivisions]}
 	position={[0, 0, 0]}
 />
-<T.OrthographicCamera makeDefault position={[0, 1, 0]} />
+<T.OrthographicCamera
+	makeDefault
+	position={[0, 1, 0]}
+	oncreate={(ref) => {
+		ref.lookAt(0, 0, 0);
+		ref.right = camRight;
+		ref.left = camLeft;
+		ref.top = camTop;
+		ref.bottom = camBottom;
+		ref.zoom = 1;
+		ref.updateProjectionMatrix();
+	}}
+/>
 
 <T.Mesh>
 	<T.PlaneGeometry args={[2, 2]} />
