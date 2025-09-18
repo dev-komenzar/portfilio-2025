@@ -16,11 +16,11 @@ technologies:
 status: 'completed'
 startDate: '2021-07-01'
 images:
-  thumbnail: 'static/projects/hodoji-web/thumbnail.png'
+  thumbnail: 'projects/hodoji-web/thumbnail.png'
   gallery:
-    - 'static/projects/hodoji-web/pic1.png'
-    - 'static/projects/hodoji-web/pic2.png'
-    - 'static/projects/hodoji-web/pic3.png'
+    - 'projects/hodoji-web/pic1.png'
+    - 'projects/hodoji-web/pic2.png'
+    - 'projects/hodoji-web/pic3.png'
 links:
   demo: 'https://samgha.org'
 featured: true

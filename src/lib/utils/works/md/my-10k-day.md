@@ -15,6 +15,11 @@ technologies:
   - 'TailwindCSS'
   - 'Coolify'
 startDate: '2025-07-01'
+images:
+  thumbnail: 'projects/10k/thumbnail.png'
+  gallery:
+    - 'projects/10k/home.jpeg'
+    - 'projects/10k/anniversary.jpeg'
 links:
   demo: 'https://10k.kamodigi.work'
 order: 1

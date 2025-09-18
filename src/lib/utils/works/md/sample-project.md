@@ -18,7 +18,7 @@ status: 'completed'
 startDate: '2025-07-01'
 endDate: '2025-07-23'
 images:
-  thumbnail: '/projects/sample-project/thumbnail.webp'
+  thumbnail: ''
   gallery:
     - '/projects/sample-project/gallery-1.webp'
     - '/projects/sample-project/gallery-2.webp'

@@ -1,4 +1,5 @@
 <script lang="ts">
+import ThumbnailCard from '$lib/components/ui/ThumbnailCard.svelte';
 import { m } from '$lib/paraglide/messages';
 import { getLocale } from '$lib/paraglide/runtime.js';
 import { getProjectsRemote } from '$lib/utils/works/data.remote';
@@ -20,12 +21,17 @@ const lang = getLocale()
       {:else}
         <div class="projects-grid">
           {#each query.current as project (project.metadata.id)}
-          {@const { title, description } = project.metadata}
-            <div class="project-card">
+          {@const { title, shortDescription, images, links } = project.metadata}
+            <ThumbnailCard
+              variant="bordered"
+              hover
+              thumbnailUrl={images.thumbnail || undefined}
+              thumbnailAlt={title[lang]}
+              href={links?.demo ?? links?.website ?? links?.github}
+            >
               <h3 class="project-title">{title[lang]}</h3>
-              <p class="project-description">{description[lang]}</p>
-              <!-- Add more project details as needed -->
-            </div>
+              <p class="project-description">{shortDescription[lang]}</p>
+            </ThumbnailCard>
           {/each}
         </div>
       {/if}
@@ -34,5 +40,9 @@ const lang = getLocale()
 </section>
 
 <style>
-
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-6);
+  }
 </style>
