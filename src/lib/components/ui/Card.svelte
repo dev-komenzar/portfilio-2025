@@ -32,16 +32,16 @@
 
   /* Style variants */
   .card-default {
-    background-color: var(--color-surface);
+    background-color: var(--color-neutral-white);
   }
 
   .card-elevated {
-    background-color: var(--color-surface-elevated);
+    background-color: var(--color-neutral-white);
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   }
 
   .card-bordered {
-    background-color: var(--color-surface);
+    background-color: var(--color-neutral-white);
     border: 1px solid var(--color-border);
   }
 
