@@ -1,8 +1,8 @@
 <script lang="ts">
 import ThumbnailCard from '$lib/components/ui/ThumbnailCard.svelte';
+import { getProjectsRemote } from '$lib/data/works/data.remote';
 import { m } from '$lib/paraglide/messages';
 import { getLocale } from '$lib/paraglide/runtime.js';
-import { getProjectsRemote } from '$lib/utils/works/data.remote';
 
 const query = getProjectsRemote()
 const lang = getLocale()
