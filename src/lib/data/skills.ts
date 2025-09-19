@@ -1,6 +1,7 @@
 import ClojureIcon from '$lib/assets/skills/icons/clojure.svg'
 import CssIcon from '$lib/assets/skills/icons/css.svg'
 import ElixirIcon from '$lib/assets/skills/icons/elixir.svg'
+import HtmlIcon from '$lib/assets/skills/icons/html.svg'
 import JavaScriptIcon from '$lib/assets/skills/icons/javascript.svg'
 import LogseqIcon from '$lib/assets/skills/icons/logseq.svg'
 import NotionIcon from '$lib/assets/skills/icons/notion.svg'
@@ -35,6 +36,10 @@ export const languages: Skill[] = [
 	{
 		name: 'CSS',
 		icon: CssIcon
+	},
+	{
+		name: 'HTML',
+		icon: HtmlIcon
 	}
 ]
 
