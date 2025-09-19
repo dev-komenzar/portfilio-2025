@@ -8,7 +8,6 @@
 	<div class="icon-wrapper">
 		<img src={skill.icon} alt={skill.name} class="skill-icon" />
 	</div>
-	
 </div>
 
 <style>
