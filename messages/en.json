@@ -27,5 +27,6 @@
 	"language_switchTo": "日本語に切り替える",
 	"language_current": "English",
 	"theme_toggle_light": "Switch to light mode",
-	"theme_toggle_dark": "Switch to dark mode"
+	"theme_toggle_dark": "Switch to dark mode",
+	"view_all_projects": "View all projects"
 }
