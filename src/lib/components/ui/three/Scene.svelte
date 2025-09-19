@@ -11,7 +11,6 @@
 	// Uniforms
 	const MAX_CLICKS = 10;
 	const { size } = useThrelte();
-	$inspect(size);
 	export const uniforms = {
 		uResolution: {
 			value: new Vector2(size.current.width, size.current.height),
@@ -55,9 +54,6 @@
 		uniforms.uTime.value = clock.getElapsedTime();
 	});
 
-	const gridHelperSize = 100;
-	const gridHelperDivisions = 10;
-
 	onMount(() => {
 		// Canvasにクリックイベントを登録
 		canvas.addEventListener("pointerdown", onPointerDown);
@@ -69,10 +65,12 @@
 	});
 </script>
 
+<!-- Helper grid
 <T.GridHelper
-	args={[gridHelperSize, gridHelperDivisions]}
+	args={[100, 10]}
 	position={[0, 0, 0]}
-/>
+/>-->
+
 <T.OrthographicCamera
 	makeDefault
 	position={[0, 1, 0]}
