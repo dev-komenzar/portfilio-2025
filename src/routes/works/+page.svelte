@@ -1,10 +1,9 @@
 <script lang="ts">
-	import { resolve } from '$app/paths';
-	import ThumbnailCard from '$lib/components/ui/ThumbnailCard.svelte';
-	import { getProjectsRemote } from '$lib/data/works/data.remote';
-	import { m } from '$lib/paraglide/messages';
-	import { getLocale } from '$lib/paraglide/runtime';
-
+	import { asset, resolve } from "$app/paths";
+	import ThumbnailCard from "$lib/components/ui/ThumbnailCard.svelte";
+	import { getProjectsRemote } from "$lib/data/works/data.remote";
+	import { m } from "$lib/paraglide/messages";
+	import { getLocale } from "$lib/paraglide/runtime";
 
 	const query = getProjectsRemote();
 	const lang = getLocale();
@@ -29,10 +28,13 @@
 				<div class="projects-grid">
 					{#each query.current as project (project.metadata.id)}
 						{@const { title, shortDescription, images, id } = project.metadata}
+						{@const thumbnailUrl = images.thumbnail
+							? asset("works/" + images.thumbnail)
+							: undefined}
 						<ThumbnailCard
 							variant="bordered"
 							hover
-							thumbnailUrl={images.thumbnail || undefined}
+							{thumbnailUrl}
 							thumbnailAlt={title[lang]}
 							href={resolve(`/works/${id}`)}
 						>

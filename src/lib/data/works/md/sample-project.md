@@ -20,9 +20,9 @@ endDate: '2025-07-23'
 images:
   thumbnail: ''
   gallery:
-    - '/projects/sample-project/gallery-1.webp'
-    - '/projects/sample-project/gallery-2.webp'
-    - '/projects/sample-project/gallery-3.webp'
+    - '/sample-project/gallery-1.webp'
+    - '/sample-project/gallery-2.webp'
+    - '/sample-project/gallery-3.webp'
 links:
   demo: 'https://example.com/demo'
   github: 'https://github.com/username/sample-project'

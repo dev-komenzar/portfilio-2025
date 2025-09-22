@@ -1,15 +1,14 @@
 <script lang="ts">
-  import { resolve } from '$app/paths';
-  import { getProjectBySlugRemote } from '$lib/data/works/data.remote.js';
-  import { m } from '$lib/paraglide/messages';
-  import { getLocale } from '$lib/paraglide/runtime.js';
-  
+  import { asset, resolve } from "$app/paths";
+  import { getProjectBySlugRemote } from "$lib/data/works/data.remote.js";
+  import { m } from "$lib/paraglide/messages";
+  import { getLocale } from "$lib/paraglide/runtime.js";
+
   // Get the slug from the URL using $props()
   const { params } = $props();
-  const {slug}=params
+  const { slug } = params;
   const query = getProjectBySlugRemote(slug);
-	const lang = getLocale();
-
+  const lang = getLocale();
 </script>
 
 <svelte:head>
@@ -20,19 +19,29 @@
 <section class="project-detail">
   <div class="container">
     <div class="project-header">
-      <a href={resolve("/works")} class="back-link">&larr; {m.project_backToProjects()}</a>
+      <a href={resolve("/works")} class="back-link"
+        >&larr; {m.project_backToProjects()}</a
+      >
       <h1 class="project-title">{m.project_title()} - {slug}</h1>
     </div>
-    
+
     {#if query.error}
       <p class="error-message">Error loading project: {query.error.message}</p>
     {:else if query.loading}
       <p class="loading-message">Loading project...</p>
     {:else if query.current}
-    {@const project = query.current}
+      {@const project = query.current}
       <div class="project-content">
-       <h2>{project.metadata.title[lang]}</h2>
-       {@html project.content}
+        <div class="project-thumbnail">
+          <img
+            src={asset(project.metadata.images.thumbnail)}
+            alt={project.metadata.title[lang]}
+          />
+        </div>
+        <h2>{project.metadata.title[lang]}</h2>
+        <div>
+          {@html project.content}
+        </div>
       </div>
     {:else}
       <p class="project-not-found">Project not found.</p>
@@ -44,22 +53,22 @@
   .project-detail {
     padding: var(--space-16) 0;
   }
-  
+
   .project-header {
     margin-bottom: var(--space-8);
   }
-  
+
   .back-link {
     display: inline-block;
     margin-bottom: var(--space-4);
     color: var(--color-text-secondary);
     transition: color var(--transition-fast);
   }
-  
+
   .back-link:hover {
     color: var(--color-primary);
   }
-  
+
   .project-title {
     font-size: var(--text-4xl);
     font-weight: 700;
@@ -69,13 +78,13 @@
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
-  
+
   .project-content {
-    display: grid;
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
     gap: var(--space-8);
   }
-  
+
   .project-not-found {
     color: var(--color-text-muted);
     font-style: italic;
@@ -84,7 +93,7 @@
     border: 1px dashed var(--color-border);
     border-radius: 8px;
   }
-  
+
   /* Responsive layout */
   @media (min-width: 768px) {
     .project-content {

@@ -8,6 +8,9 @@ const config = {
 	preprocess: vitePreprocess(),
 	kit: {
 		adapter: adapter(),
+		paths: {
+			assets: '',
+		},
 		experimental: {
 			remoteFunctions: true
 		}
