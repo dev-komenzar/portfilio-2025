@@ -28,13 +28,13 @@
 			{:else}
 				<div class="projects-grid">
 					{#each query.current as project (project.metadata.id)}
-						{@const { title, shortDescription, images, links } = project.metadata}
+						{@const { title, shortDescription, images, id } = project.metadata}
 						<ThumbnailCard
 							variant="bordered"
 							hover
 							thumbnailUrl={images.thumbnail || undefined}
 							thumbnailAlt={title[lang]}
-							href={links?.demo ?? links?.website ?? links?.github}
+							href={resolve(`/works/${id}`)}
 						>
 							<h3 class="project-title">{title[lang]}</h3>
 							<p class="project-description">{shortDescription[lang]}</p>

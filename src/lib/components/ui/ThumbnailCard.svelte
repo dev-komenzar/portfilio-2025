@@ -6,6 +6,7 @@
 		thumbnailUrl?: string;
 		thumbnailAlt?: string;
 		href?: string;
+		isExternal?: boolean;
 		children?: Snippet;
 		// Cardコンポーネントが受け取る残りのプロパティ
 		variant?: "default" | "elevated" | "bordered" | "gradient";
@@ -15,13 +16,19 @@
 	const noImagePlaceholder =
 	'https://placehold.jp/eeeeee/cccccc/240x180.png?text=No%20Image'
 
-	const { thumbnailUrl = noImagePlaceholder, thumbnailAlt ='No Image', href, children, ...restProps }: Props =
-		$props();
+	const {
+		thumbnailUrl = noImagePlaceholder,
+		thumbnailAlt = 'No Image',
+		href,
+		isExternal = false,
+		children,
+		...restProps
+	}: Props = $props();
 </script>
 
 <Card {...restProps} clickable={!!href}>
 	{#if href}
-		<a {href} class="card-link" target="_blank" rel="noopener noreferrer">
+		<a {href} class="card-link" target={isExternal ? '_blank' : undefined} rel={isExternal ? 'noopener noreferrer' : undefined}>
 			<div class="thumbnail-wrapper">
 				<img src={thumbnailUrl} alt={thumbnailAlt} class="thumbnail-image" />
 			</div>
