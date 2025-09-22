@@ -53,7 +53,8 @@
 Svelteコンポーネント、ユーティリティ関数、型定義など、アプリケーションのコアとなるモジュールを格納します。このディレクトリ内のファイルは $lib/ というエイリアスでインポートできます。
   - components/: `<NavBar>`のような再利用可能なUIコンポーネントを配置します。
   - assets/: アイコン(SVG)など、JavaScript/TypeScriptコード内で直接 import して使用するアセットを配置します。
-  - works/: ポートフォリオに表示するプロジェクトデータを格納します。データの作成方法については src/lib/works/README.md を参照してください。
+  - data/: WorksやSkillsでしようするデータを配置する。
+    - works/: ポートフォリオに表示するプロジェクトデータを格納します。データの作成方法については src/lib/data/works/README.md を参照してください。
   - paraglide/: (自動生成) Paraglide JSによって生成される翻訳関連のファイルです。このディレクトリは手動で編集しないでください。
   - types/: プロジェクト全体で使われるTypeScriptの型定義（例: Project型など）を配置します。
 
