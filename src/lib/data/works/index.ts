@@ -40,8 +40,15 @@ export async function getFeaturedProjects(limit?: number): Promise<ProjectData[]
  * @returns プロジェクトデータ、見つからない場合はnull
  */
 export async function getProjectBySlug(slug: string): Promise<ProjectData | null> {
-  const projects = await getProjects();
-  return projects.find(project => project.metadata.id === slug) || null;
+  try {
+    // 動的にモジュールをインポート
+    const module = await import(`./md/${slug}.md?raw`);
+    const content = await parseProjectMarkdown(module.default);
+    return content;
+  } catch (e) {
+    console.error(`Project with slug "${slug}" not found.`, e);
+    return null; // プロジェクトが見つからない場合はnullを返す
+  }
 }
 
 /**
