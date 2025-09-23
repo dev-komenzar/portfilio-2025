@@ -1,11 +1,11 @@
-import { prerender, query } from '$app/server';
+import { prerender } from '$app/server';
 import { error } from '@sveltejs/kit';
 import * as v from 'valibot';
 import { getFeaturedProjects, getProjectBySlug, getProjects } from '.';
 
-export const getProjectsRemote = query(getProjects)
+export const getProjectsRemote = prerender(getProjects)
 
-export const getFeaturedProjectsRemote = query(v.optional(v.number()) ,async (limit: number = 3) => {
+export const getFeaturedProjectsRemote = prerender(v.optional(v.number()) ,async (limit: number = 3) => {
 	return await getFeaturedProjects(limit)
 })
 

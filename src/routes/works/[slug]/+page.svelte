@@ -3,6 +3,7 @@
   import { getProjectBySlugRemote } from "$lib/data/works/data.remote.js";
   import { m } from "$lib/paraglide/messages";
   import { getLocale } from "$lib/paraglide/runtime.js";
+  import { TinySlider } from "svelte-tiny-slider";
 
   // Get the slug from the URL using $props()
   const { params } = $props();
@@ -16,13 +17,13 @@
   <meta name="description" content={m.project_title()} />
 </svelte:head>
 
-<section class="project-detail">
+<section class="detail">
   <div class="container">
-    <div class="project-header">
+    <div class="header">
       <a href={resolve("/works")} class="back-link"
         >&larr; {m.project_backToProjects()}</a
       >
-      <h1 class="project-title">{m.project_title()} - {slug}</h1>
+      <h1 class="title">{m.project_title()} - {slug}</h1>
     </div>
 
     {#if query.error}
@@ -31,12 +32,38 @@
       <p class="loading-message">Loading project...</p>
     {:else if query.current}
       {@const project = query.current}
-      <div class="project-content">
-        <div class="project-thumbnail">
-          <img
-            src={asset(project.metadata.images.thumbnail)}
-            alt={project.metadata.title[lang]}
-          />
+      {@const images = [
+        project.metadata.images.thumbnail,
+        ...project.metadata.images.gallery,
+      ]}
+      {@const { thumbnail, gallery } = project.metadata.images}
+      <div class="content">
+        <div class="gallery">
+          <TinySlider>
+            <img src={asset(thumbnail)} alt="サムネイル" />
+            {#each gallery as image (image.toString())}
+              <img src={asset(image)} alt={project.metadata.title[lang]} />
+            {/each}
+
+            {#snippet controls({ setIndex, currentIndex })}
+              <div class="controls-wrapper">
+                {#each images as image, i (image.toString())}
+                  <button
+                    class:active={i === currentIndex}
+                    onclick={() => setIndex(i)}
+                    onfocus={() => setIndex(i)}
+                    aria-label="Go to slide {i + 1}"
+                  >
+                    <img
+                      src={asset(image)}
+                      alt={`Pic ${i}`}
+                      class="thumbnail"
+                    />
+                  </button>
+                {/each}
+              </div>
+            {/snippet}
+          </TinySlider>
         </div>
         <h2>{project.metadata.title[lang]}</h2>
         <div>
@@ -44,18 +71,47 @@
         </div>
       </div>
     {:else}
-      <p class="project-not-found">Project not found.</p>
+      <p class="not-found">Project not found.</p>
     {/if}
   </div>
 </section>
 
 <style>
-  .project-detail {
+  .detail {
     padding: var(--space-16) 0;
   }
 
-  .project-header {
+  .header {
     margin-bottom: var(--space-8);
+  }
+
+  .gallery {
+    position: relative;
+    overflow: hidden;
+  }
+
+  img {
+    max-width: 720px;
+    border-radius: 8px;
+  }
+
+  .controls-wrapper {
+    margin-top: var(--space-4);
+  }
+
+  .controls-wrapper > * + * {
+    margin-left: var(--space-2);
+  }
+
+  button {
+    border: none;
+  }
+
+  .thumbnail {
+    width: 120px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 4px;
   }
 
   .back-link {
@@ -69,7 +125,7 @@
     color: var(--color-primary);
   }
 
-  .project-title {
+  .title {
     font-size: var(--text-4xl);
     font-weight: 700;
     margin-bottom: var(--space-6);
@@ -79,13 +135,13 @@
     background-clip: text;
   }
 
-  .project-content {
-    display: flex;
+  .content {
+    /*display: flex;*/
     flex-direction: column;
     gap: var(--space-8);
   }
 
-  .project-not-found {
+  .not-found {
     color: var(--color-text-muted);
     font-style: italic;
     text-align: center;
@@ -96,7 +152,7 @@
 
   /* Responsive layout */
   @media (min-width: 768px) {
-    .project-content {
+    .content {
       grid-template-columns: 2fr 1fr;
     }
   }

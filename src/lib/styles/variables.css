@@ -117,7 +117,7 @@
   --container-padding: 1rem;
   --header-height: 4rem;
   --footer-height: 6rem;
-  --max-width: 1200px;
+  --max-width: calc(720px + var(--container-padding) * 2);
 }
 
 /* Media query variables */
