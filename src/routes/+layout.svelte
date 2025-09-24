@@ -1,16 +1,22 @@
 <script lang="ts">
-  import { type Snippet } from 'svelte';
-  import '../lib/styles/global.css';
+  import { type Snippet } from "svelte";
+  import "../lib/styles/global.css";
 
-  const {children}: {children: Snippet} = $props()
-  
+  const { children }: { children: Snippet } = $props();
 </script>
+
+<svelte:head>
+  <script
+    async
+    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8951400341045454"
+    crossorigin="anonymous"
+  ></script>
+</svelte:head>
 
 <div class="layout">
   <main id="main-content" class="main-content">
     {@render children()}
   </main>
-  
 </div>
 
 <style>
@@ -19,7 +25,7 @@
     flex-direction: column;
     min-height: 100vh;
   }
-  
+
   .main-content {
     flex: 1;
     margin-top: 0px;
