@@ -7,6 +7,9 @@
 		"pnpm": "10.17.1",
 		"node": "^24.0.0"
 	},
+	"pnpm": {
+		"onlyBuiltDependencies": ["esbuild"]
+	},
 	"scripts": {
 		"dev": "vite dev --port=5177 --open",
 		"build": "vite build",
