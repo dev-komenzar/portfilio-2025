@@ -9,17 +9,17 @@
 	target="_blank"
 	rel="noopener noreferrer"
 	aria-label={label}
-	class="social-link"
+	class="link"
 >
-	<div class="social-item">
+	<div class="item">
 		<div class="icon-wrapper">
-			<img src={icon} alt={label} class="social-icon" />
+			<img src={icon} alt={label} class="icon" />
 		</div>
 	</div>
 </a>
 
 <style>
-	.social-link {
+	.link {
 		display: inline-block;
 		color: var(--neutral-light); /* アイコンの色を親要素から継承 */
 		transition:
@@ -27,12 +27,12 @@
 			transform 0.2s ease-in-out;
 	}
 
-	.social-link:hover {
+	.link:hover {
 		color: var(--primary-color); /* ホバー時の色 */
 		transform: translateY(-2px);
 	}
 
-	.social-item {
+	.item {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
@@ -42,7 +42,7 @@
 		transition: background-color 0.2s;
 	}
 
-	.social-item:hover {
+	.item:hover {
 		background-color: var(--neutral-pale);
 	}
 
@@ -52,5 +52,11 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
+	}
+
+	.icon {
+		width: 100%;
+		height: 100%;
+		object-fit: contain;
 	}
 </style>
