@@ -23,6 +23,21 @@ export async function getProjects(
 }
 
 /**
+ * すべてのワークのslugを取得する関数
+ */
+export async function getAllWorkSlugs(): Promise<string[]> {
+  const modules = import.meta.glob('./md/*.md', { as: 'raw', eager: true });
+  const slugs = Object.keys(modules).map(path => {
+    const match = path.match(/\/md\/(.*)\.md$/);
+    return match ? match[1] : '';
+  }).filter(slug => slug !== '');
+  console.log('All work slugs:', slugs);
+  return slugs;
+}
+
+
+
+/**
  * 特集プロジェクトのみを取得する関数
  * 
  * @param limit 取得する最大数
