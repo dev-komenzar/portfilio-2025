@@ -1,25 +1,25 @@
-import type { ProjectData, ProjectFilterOptions, ProjectMetadata, ProjectSortOption } from '$lib/types/project';
-import { filterProjects, parseProjectMarkdown, sortProjects } from '$lib/utils/markdown';
+import type { WorkData, WorkFilterOptions, WorkMetadata, WorkSortOption } from '$lib/types/project';
+import { filterWorks, parseWorkMarkdown, sortWorks } from '$lib/utils/markdown';
 
 /**
- * すべてのプロジェクトを取得する関数
+ * すべてのワークを取得する関数
  * 
  * @param options フィルタリングとソートのオプション
- * @returns プロジェクトデータの配列
+ * @returns ワークデータの配列
  */
-export async function getProjects(
-  filterOptions?: ProjectFilterOptions,
-  sortOption?: ProjectSortOption
-): Promise<ProjectData[]> {
+export async function getWorks(
+  filterOptions?: WorkFilterOptions,
+  sortOption?: WorkSortOption
+): Promise<WorkData[]> {
   // マークダウンファイルを読み込む
   const modules = import.meta.glob('./md/*.md', { as: 'raw', eager: true });
-  const projects = await Promise.all(Object.entries(modules).map(([, content]) => {
-    return parseProjectMarkdown(content as string);
+  const works = await Promise.all(Object.entries(modules).map(([, content]) => {
+    return parseWorkMarkdown(content as string);
   }));
   
   // フィルタリングとソートを適用
-  const filteredProjects = filterProjects(projects, filterOptions);
-  return sortProjects(filteredProjects, sortOption);
+  const filteredWorks = filterWorks(works, filterOptions);
+  return sortWorks(filteredWorks, sortOption);
 }
 
 /**
@@ -38,55 +38,55 @@ export async function getAllWorkSlugs(): Promise<string[]> {
 
 
 /**
- * 特集プロジェクトのみを取得する関数
+ * 特集ワークのみを取得する関数
  * 
  * @param limit 取得する最大数
- * @returns 特集プロジェクトデータの配列
+ * @returns 特集ワークデータの配列
  */
-export async function getFeaturedProjects(limit?: number): Promise<ProjectData[]> {
-  const projects = await getProjects({ featuredOnly: true });
-  return limit ? projects.slice(0, limit) : projects;
+export async function getFeaturedWorks(limit?: number): Promise<WorkData[]> {
+  const works = await getWorks({ featuredOnly: true });
+  return limit ? works.slice(0, limit) : works;
 }
 
 /**
- * スラッグからプロジェクトを取得する関数
+ * スラッグからワークを取得する関数
  * 
- * @param slug プロジェクトのスラッグ（ID）
- * @returns プロジェクトデータ、見つからない場合はnull
+ * @param slug ワークのスラッグ（ID）
+ * @returns ワークデータ、見つからない場合はnull
  */
-export async function getProjectBySlug(slug: string): Promise<ProjectData | null> {
+export async function getWorkBySlug(slug: string): Promise<WorkData | null> {
   try {
     // 動的にモジュールをインポート
     const module = await import(`./md/${slug}.md?raw`);
-    const content = await parseProjectMarkdown(module.default);
+    const content = await parseWorkMarkdown(module.default);
     return content;
   } catch (e) {
-    console.error(`Project with slug "${slug}" not found.`, e);
-    return null; // プロジェクトが見つからない場合はnullを返す
+    console.error(`Work with slug "${slug}" not found.`, e);
+    return null; // ワークが見つからない場合はnullを返す
   }
 }
 
 /**
- * 関連プロジェクトを取得する関数
+ * 関連ワークを取得する関数
  * 
- * @param currentProject 現在のプロジェクト
+ * @param currentWork 現在のワーク
  * @param limit 取得する最大数
- * @returns 関連プロジェクトデータの配列
+ * @returns 関連ワークデータの配列
  */
-export async function getRelatedProjects(
-  currentProject: ProjectMetadata,
+export async function getRelatedWorks(
+  currentWork: WorkMetadata,
   limit = 3
-): Promise<ProjectData[]> {
-  // 同じカテゴリのプロジェクトを取得
-  const projects = await getProjects({
-    category: currentProject.category
+): Promise<WorkData[]> {
+  // 同じカテゴリのワークを取得
+  const works = await getWorks({
+    category: currentWork.category
   });
   
-  // 現在のプロジェクトを除外
-  const filteredProjects = projects.filter(
-    project => project.metadata.id !== currentProject.id
+  // 現在のワークを除外
+  const filteredWorks = works.filter(
+    work => work.metadata.id !== currentWork.id
   );
   
   // 最大数を制限
-  return filteredProjects.slice(0, limit);
+  return filteredWorks.slice(0, limit);
 }

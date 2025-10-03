@@ -1,14 +1,14 @@
-import type { ProjectData, ProjectFilterOptions, ProjectMetadata, ProjectSortOption } from '$lib/types/project';
-import { unified } from 'unified';
-import type { Root, RootContent } from 'mdast';
-import type { Literal } from 'unist';
-import type { VFile } from 'vfile';
-import remarkParse from 'remark-parse';
-import remarkFrontmatter from 'remark-frontmatter';
-import remarkRehype from 'remark-rehype';
-import rehypeStringify from 'rehype-stringify';
+import type { WorkData, WorkFilterOptions, WorkMetadata, WorkSortOption } from '$lib/types/project';
 import * as yaml from 'js-yaml';
+import type { Root, RootContent } from 'mdast';
+import rehypeStringify from 'rehype-stringify';
+import remarkFrontmatter from 'remark-frontmatter';
+import remarkParse from 'remark-parse';
+import remarkRehype from 'remark-rehype';
+import { unified } from 'unified';
+import type { Literal } from 'unist';
 import { visit } from 'unist-util-visit';
+import type { VFile } from 'vfile';
 
 /**
  * Custom remark plugin to extract and parse frontmatter.
@@ -35,7 +35,7 @@ function remarkExtractFrontmatter() {
  * @param markdown マークダウンファイルの内容
  * @returns 解析されたプロジェクトデータ
  */
-export async function parseProjectMarkdown(markdown: string): Promise<ProjectData> {
+export async function parseWorkMarkdown(markdown: string): Promise<WorkData> {
   const file = await unified()
     .use(remarkParse)
     .use(remarkFrontmatter, ['yaml'])
@@ -48,7 +48,7 @@ export async function parseProjectMarkdown(markdown: string): Promise<ProjectDat
   const content = String(file);
 
   // ProjectMetadataの型に合わせる
-  const projectMetadata: ProjectMetadata = {
+  const projectMetadata: WorkMetadata = {
     id: metadata.id || '',
     title: metadata.title || { ja: '', en: '' },
     description: metadata.description || { ja: '', en: '' },
@@ -81,10 +81,10 @@ export async function parseProjectMarkdown(markdown: string): Promise<ProjectDat
  * @param sortOption ソートオプション
  * @returns ソートされたプロジェクトの配列
  */
-export function sortProjects(
-  projects: ProjectData[], 
-  sortOption: ProjectSortOption = 'newest'
-): ProjectData[] {
+export function sortWorks(
+  projects: WorkData[], 
+  sortOption: WorkSortOption = 'newest'
+): WorkData[] {
   return [...projects].sort((a, b) => {
     switch (sortOption) {
       case 'newest':
@@ -108,10 +108,10 @@ export function sortProjects(
  * @param options フィルタリングオプション
  * @returns フィルタリングされたプロジェクトの配列
  */
-export function filterProjects(
-  projects: ProjectData[],
-  options?: ProjectFilterOptions
-): ProjectData[] {
+export function filterWorks(
+  projects: WorkData[],
+  options?: WorkFilterOptions
+): WorkData[] {
   if (!options) return projects;
   
   return projects.filter(project => {
