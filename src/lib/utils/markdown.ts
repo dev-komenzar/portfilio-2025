@@ -1,4 +1,4 @@
-import type { WorkData, WorkFilterOptions, WorkMetadata, WorkSortOption } from '$lib/types/project';
+import type { WorkData, WorkFilterOptions, WorkMetadata, WorkSortOption } from '$lib/types/work';
 import * as yaml from 'js-yaml';
 import type { Root, RootContent } from 'mdast';
 import rehypeStringify from 'rehype-stringify';
@@ -47,8 +47,8 @@ export async function parseWorkMarkdown(markdown: string): Promise<WorkData> {
   const metadata = (file.data.frontmatter || {}) as Record<string, any>;
   const content = String(file);
 
-  // ProjectMetadataの型に合わせる
-  const projectMetadata: WorkMetadata = {
+  // workMetadataの型に合わせる
+  const workMetadata: WorkMetadata = {
     id: metadata.id || '',
     title: metadata.title || { ja: '', en: '' },
     description: metadata.description || { ja: '', en: '' },
@@ -71,21 +71,21 @@ export async function parseWorkMarkdown(markdown: string): Promise<WorkData> {
     order: metadata.order || 0
   };
   
-  return { metadata: projectMetadata, content };
+  return { metadata: workMetadata, content };
 }
 
 /**
  * プロジェクトをソートする関数
  * 
- * @param projects ソートするプロジェクトの配列
+ * @param works ソートするプロジェクトの配列
  * @param sortOption ソートオプション
  * @returns ソートされたプロジェクトの配列
  */
 export function sortWorks(
-  projects: WorkData[], 
+  works: WorkData[], 
   sortOption: WorkSortOption = 'newest'
 ): WorkData[] {
-  return [...projects].sort((a, b) => {
+  return [...works].sort((a, b) => {
     switch (sortOption) {
       case 'newest':
         return new Date(b.metadata.startDate).getTime() - new Date(a.metadata.startDate).getTime();
@@ -104,34 +104,34 @@ export function sortWorks(
 /**
  * プロジェクトをフィルタリングする関数
  * 
- * @param projects フィルタリングするプロジェクトの配列
+ * @param works フィルタリングするプロジェクトの配列
  * @param options フィルタリングオプション
  * @returns フィルタリングされたプロジェクトの配列
  */
 export function filterWorks(
-  projects: WorkData[],
+  works: WorkData[],
   options?: WorkFilterOptions
 ): WorkData[] {
-  if (!options) return projects;
+  if (!options) return works;
   
-  return projects.filter(project => {
+  return works.filter(work => {
     // カテゴリでフィルタリング
-    if (options.category && project.metadata.category !== options.category) {
+    if (options.category && work.metadata.category !== options.category) {
       return false;
     }
     
     // ステータスでフィルタリング
-    if (options.status && project.metadata.status !== options.status) {
+    if (options.status && work.metadata.status !== options.status) {
       return false;
     }
     
     // 特集プロジェクトのみを表示
-    if (options.featuredOnly && !project.metadata.featured) {
+    if (options.featuredOnly && !work.metadata.featured) {
       return false;
     }
     
     // 技術でフィルタリング
-    if (options.technology && !project.metadata.technologies.includes(options.technology)) {
+    if (options.technology && !work.metadata.technologies.includes(options.technology)) {
       return false;
     }
     

@@ -1,6 +1,6 @@
 <script lang="ts">
   import { asset, resolve } from "$app/paths";
-  import { getProjectBySlugRemote } from "$lib/data/works/data.remote.js";
+  import { getWorkBySlugRemote } from "$lib/data/works/data.remote.js";
   import { m } from "$lib/paraglide/messages";
   import { getLocale } from "$lib/paraglide/runtime.js";
   import { TinySlider } from "svelte-tiny-slider";
@@ -8,41 +8,41 @@
   // Get the slug from the URL using $props()
   const { params } = $props();
   const { slug } = params;
-  const query = getProjectBySlugRemote(slug);
+  const query = getWorkBySlugRemote(slug);
   const lang = getLocale();
 </script>
 
 <svelte:head>
-  <title>{m.project_title()} - {slug}</title>
-  <meta name="description" content={m.project_title()} />
+  <title>{m.work_title()} - {slug}</title>
+  <meta name="description" content={m.work_title()} />
 </svelte:head>
 
 <section class="detail">
   <div class="container">
     <div class="header">
       <a href={resolve("/works")} class="back-link"
-        >&larr; {m.project_backToProjects()}</a
+        >&larr; {m.work_backToWorks()}</a
       >
-      <h1 class="title">{m.project_title()} - {slug}</h1>
+      <h1 class="title">{m.work_title()} - {slug}</h1>
     </div>
 
     {#if query.error}
-      <p class="error-message">Error loading project: {query.error.message}</p>
+      <p class="error-message">Error loading work: {query.error.message}</p>
     {:else if query.loading}
-      <p class="loading-message">Loading project...</p>
+      <p class="loading-message">Loading work...</p>
     {:else if query.current}
-      {@const project = query.current}
+      {@const work = query.current}
       {@const images = [
-        project.metadata.images.thumbnail,
-        ...project.metadata.images.gallery,
+        work.metadata.images.thumbnail,
+        ...work.metadata.images.gallery,
       ]}
-      {@const { thumbnail, gallery } = project.metadata.images}
+      {@const { thumbnail, gallery } = work.metadata.images}
       <div class="content">
         <div class="gallery">
           <TinySlider>
             <img src={asset(thumbnail)} alt="サムネイル" />
             {#each gallery as image (image.toString())}
-              <img src={asset(image)} alt={project.metadata.title[lang]} />
+              <img src={asset(image)} alt={work.metadata.title[lang]} />
             {/each}
 
             {#snippet controls({ setIndex, currentIndex })}
@@ -65,13 +65,13 @@
             {/snippet}
           </TinySlider>
         </div>
-        <h2>{project.metadata.title[lang]}</h2>
+        <h2>{work.metadata.title[lang]}</h2>
         <div>
-          {@html project.content}
+          {@html work.content}
         </div>
       </div>
     {:else}
-      <p class="not-found">Project not found.</p>
+      <p class="not-found">Work data not found.</p>
     {/if}
   </div>
 </section>

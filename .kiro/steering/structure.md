@@ -23,16 +23,16 @@
   - `utils/` - Utility functions
   - `paraglide/` - Generated internationalization code
   - `data/` - Static data files (skills, profile)
-  - `projects/` - Project components and data
+  - `works/` - Work components and data
 
 ### Routing Structure
 - `src/routes/` - SvelteKit routes
   - `+page.svelte` - Home page
   - `+layout.svelte` - Root layout
-  - `projects/` - Project routes
-    - `+page.svelte` - Projects list page
-    - `[slug]/` - Dynamic project routes
-      - `+page.svelte` - Project detail page
+  - `works/` - Work routes
+    - `+page.svelte` - Works list page
+    - `[slug]/` - Dynamic work routes
+      - `+page.svelte` - Work detail page
 
 ## Code Conventions
 
@@ -45,7 +45,7 @@
   3. Style section
 
 ### Naming Conventions
-- **Components**: PascalCase (e.g., `ProjectCard.svelte`)
+- **Components**: PascalCase (e.g., `WorkCard.svelte`)
 - **Files/Directories**: kebab-case (e.g., `scroll-utils.ts`)
 - **Functions**: camelCase (e.g., `handleNavClick`)
 - **CSS Classes**: kebab-case (e.g., `nav-item`)
@@ -57,7 +57,7 @@
 - Follow BEM naming convention for CSS classes
 
 ### Data Management
-- Project data stored in Svelte components with metadata exports
+- Work data stored in Svelte components with metadata exports
 - Utility functions for data access in index files
 - Type definitions for data structures
 

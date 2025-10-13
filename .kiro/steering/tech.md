@@ -11,7 +11,7 @@
 ## Project Structure
 - SvelteKit page-based routing
 - Component-oriented architecture
-- Svelte-based data management for projects
+- Svelte-based data management for works
 
 ## Development Tools
 - **Package Manager**: Bun

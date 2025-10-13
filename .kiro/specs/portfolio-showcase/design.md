@@ -31,7 +31,7 @@ src/routes/
 ├── +layout.svelte          # 共通レイアウト
 ├── +layout.ts              # レイアウトデータ
 ├── +page.svelte            # ホームページ（メインポートフォリオ）
-└── projects/
+└── works/
     ├── +page.svelte        # プロジェクト一覧ページ
     └── [slug]/
         └── +page.svelte    # プロジェクト詳細ページ
@@ -51,12 +51,12 @@ src/routes/
 #### 2. セクションコンポーネント
 
 - `HeroSection.svelte`: ヒーローセクション
-- `ProjectsSection.svelte`: プロジェクト一覧セクション
+- `WorksSection.svelte`: プロジェクト一覧セクション
 - `AboutMe.svelte`: 自己紹介セクション
 
 #### 3. UIコンポーネント
 
-- `ProjectCard.svelte`: プロジェクトカード
+- `WorkCard.svelte`: プロジェクトカード
 - `Modal.svelte`: モーダルダイアログ
 - `Button.svelte`: 再利用可能ボタン
 - `LanguageSwitcher.svelte`: 言語切り替えボタン
@@ -72,8 +72,8 @@ src/routes/
 ### プロジェクトデータ構造
 
 ```typescript
-// src/lib/types/project.ts
-export interface ProjectMetadata {
+// src/lib/types/work.ts
+export interface WorkMetadata {
   id: string;
   title: Record<'ja' | 'en', string>;
   description: Record<'ja' | 'en', string>;
@@ -101,7 +101,7 @@ export interface ProjectMetadata {
 ### マークダウンベースプロジェクトデータ
 
 ```
-src/lib/projects/
+src/lib/works/
 ├── index.ts                   # プロジェクト一覧エクスポート
 └── md/
   ├── My10kDay.md            # Webアプリ My 10k Day
@@ -112,7 +112,7 @@ src/lib/projects/
 ### プロジェクトファイル構造例
 
 ```markdown
-<!-- src/lib/projects/My10kDay.md -->
+<!-- src/lib/works/My10kDay.md -->
 ---
 id: 'my-10k-day'
 title: 
@@ -132,11 +132,11 @@ technologies:
 startDate: "2025-07-01",
 endDate: undefined,
 images:
-  thumbnail: "static/projects/my-10k-day/2025-07-22 17.18.20 10k.kamodigi.work 760a3ad2e19e.png"
+  thumbnail: "static/works/my-10k-day/2025-07-22 17.18.20 10k.kamodigi.work 760a3ad2e19e.png"
   gallery:
-    - "static/projects/my-10k-day/2025-07-22 17.16.56 10k.kamodigi.work 25a802c6b514.png"
-    - "static/projects/my-10k-day/2025-07-22 17.18.36 10k.kamodigi.work 41e585b0d7ec.png"
-    - "static/projects/my-10k-day/2025-07-22 17.18.59 10k.kamodigi.work a43143937714.png"
+    - "static/works/my-10k-day/2025-07-22 17.16.56 10k.kamodigi.work 25a802c6b514.png"
+    - "static/works/my-10k-day/2025-07-22 17.18.36 10k.kamodigi.work 41e585b0d7ec.png"
+    - "static/works/my-10k-day/2025-07-22 17.18.59 10k.kamodigi.work a43143937714.png"
 links:
   demo: "https://10k.kamodigi.work"
 order: 1
@@ -148,12 +148,12 @@ order: 1
 
 ### データアクセス層
 
-- ファイル: src/lib/projects/index.ts
-- src/lib/projects/md 以下のマークダウンファイルを利用する
+- ファイル: src/lib/works/index.ts
+- src/lib/works/md 以下のマークダウンファイルを利用する
 - マークダウンのパーサーにunifiedを利用する
-- getProjects: 全てのプロジェクトを取得する
-- getFeaturedProjects
-- getProjectsBySlug
+- getWorks: 全てのプロジェクトを取得する
+- getFeaturedWorks
+- getWorksBySlug
 
 ## スタイリング設計
 

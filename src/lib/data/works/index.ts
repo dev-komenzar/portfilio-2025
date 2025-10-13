@@ -1,4 +1,4 @@
-import type { WorkData, WorkFilterOptions, WorkMetadata, WorkSortOption } from '$lib/types/project';
+import type { WorkData, WorkFilterOptions, WorkMetadata, WorkSortOption } from '$lib/types/work';
 import { filterWorks, parseWorkMarkdown, sortWorks } from '$lib/utils/markdown';
 
 /**

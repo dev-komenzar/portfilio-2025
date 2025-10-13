@@ -1,11 +1,11 @@
 <script lang="ts">
 import { asset, resolve } from '$app/paths';
 import ThumbnailCard from '$lib/components/ui/ThumbnailCard.svelte';
-import { getProjectsRemote } from '$lib/data/works/data.remote';
+import { getWorksRemote } from '$lib/data/works/data.remote';
 import { m } from '$lib/paraglide/messages';
 import { getLocale } from '$lib/paraglide/runtime.js';
 
-const query = getProjectsRemote()
+const query = getWorksRemote()
 const lang = getLocale()
 
 </script>
@@ -14,19 +14,19 @@ const lang = getLocale()
   <div class="container">
     <div class="section-header">
       <h2 class="section-title">{m.sections_works()}</h2>
-      <a href={resolve("/works")} class="view-all-link">{m.view_all_projects()} &rarr;</a>
+      <a href={resolve("/works")} class="view-all-link">{m.view_all_works()} &rarr;</a>
     </div>
     {#if query.error}
-      <p class="error-message">Error loading projects: {query.error.message}</p>
+      <p class="error-message">Error loading works: {query.error.message}</p>
     {:else if query.loading}
-      <p class="loading-message">Loading projects...</p>
+      <p class="loading-message">Loading works...</p>
     {:else if query.current}
       {#if query.current.length === 0}
-        <p class="no-projects-message">No projects found.</p>
+        <p class="no-works-message">No works found.</p>
       {:else}
-        <div class="projects-grid">
-          {#each query.current as project (project.metadata.id)}
-          {@const { title, shortDescription, images, id } = project.metadata}
+        <div class="works-grid">
+          {#each query.current as work (work.metadata.id)}
+          {@const { title, shortDescription, images, id } = work.metadata}
           {@const thumbnailUrl = images.thumbnail ? asset('works/' + images.thumbnail) : undefined}
             <ThumbnailCard
               variant="bordered"
@@ -35,8 +35,8 @@ const lang = getLocale()
               thumbnailAlt={title[lang]}
               href={resolve(`/works/${id}`)}
             >
-              <h3 class="project-title">{title[lang]}</h3>
-              <p class="project-description">{shortDescription[lang]}</p>
+              <h3 class="work-title">{title[lang]}</h3>
+              <p class="work-description">{shortDescription[lang]}</p>
             </ThumbnailCard>
           {/each}
         </div>
@@ -61,7 +61,7 @@ const lang = getLocale()
     color: var(--color-primary);
   }
 
-  .projects-grid {
+  .works-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: var(--space-6);
