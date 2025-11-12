@@ -167,7 +167,7 @@ export async function parseBlogMarkdown(markdown: string): Promise<BlogData> {
     publishedAt: metadata.publishedAt || '',
     updatedAt: metadata.updatedAt,
     thumbnail: metadata.thumbnail,
-    published: metadata.published !== false, // デフォルトはtrue
+    draft: metadata.draft === true, // デフォルトはfalse（公開状態）
     order: metadata.order
   };
 
@@ -221,8 +221,8 @@ export function filterBlogs(
   if (!options) return blogs;
 
   return blogs.filter(blog => {
-    // 公開済み記事のみ
-    if (options.publishedOnly && !blog.metadata.published) {
+    // 下書きを除外
+    if (options.excludeDrafts && blog.metadata.draft) {
       return false;
     }
 

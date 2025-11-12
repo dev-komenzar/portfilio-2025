@@ -24,8 +24,8 @@ export interface BlogMetadata {
   /** サムネイル画像のパス */
   thumbnail?: string;
 
-  /** 記事が公開状態かどうか */
-  published: boolean;
+  /** 記事が下書き状態かどうか */
+  draft: boolean;
 
   /** 表示順序（小さいほど先に表示、未指定の場合は公開日順） */
   order?: number;
@@ -50,8 +50,8 @@ export interface BlogFilterOptions {
   /** タグでフィルタリング */
   tag?: string;
 
-  /** 公開済み記事のみを表示 */
-  publishedOnly?: boolean;
+  /** 下書きを除外して表示 */
+  excludeDrafts?: boolean;
 }
 
 /**

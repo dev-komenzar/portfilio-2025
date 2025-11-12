@@ -5,7 +5,7 @@ import type { PageLoad } from './$types';
 export const load: PageLoad = async ({ params }) => {
   const blog = await getBlogBySlug(params.slug);
 
-  if (!blog || !blog.metadata.published) {
+  if (!blog || blog.metadata.draft) {
     throw error(404, 'Blog post not found');
   }
 

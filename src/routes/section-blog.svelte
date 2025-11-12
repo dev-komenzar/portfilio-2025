@@ -4,7 +4,7 @@ import ThumbnailCard from '$lib/components/ui/ThumbnailCard.svelte';
 import { getBlogs } from '$lib/data/blog';
 
 // 最新3件の記事を取得
-const blogsPromise = getBlogs({ publishedOnly: true }, 'newest');
+const blogsPromise = getBlogs({ excludeDrafts: true }, 'newest');
 
 function formatDate(dateString: string): string {
 	const date = new Date(dateString);

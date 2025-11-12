@@ -64,7 +64,7 @@ export async function getBlogBySlug(slug: string): Promise<BlogData | null> {
  * @returns タグの配列
  */
 export async function getAllTags(): Promise<string[]> {
-  const blogs = await getBlogs({ publishedOnly: true });
+  const blogs = await getBlogs({ excludeDrafts: true });
   const tags = new Set<string>();
 
   blogs.forEach(blog => {
@@ -85,7 +85,7 @@ export async function getRelatedBlogs(
   currentBlog: BlogMetadata,
   limit = 3
 ): Promise<BlogData[]> {
-  const allBlogs = await getBlogs({ publishedOnly: true });
+  const allBlogs = await getBlogs({ excludeDrafts: true });
 
   // 現在の記事を除外
   const otherBlogs = allBlogs.filter(
