@@ -27,12 +27,6 @@ export interface BlogMetadata {
   /** 記事が公開状態かどうか */
   published: boolean;
 
-  /** Zennからの移行記事の場合、元のZenn記事のURL */
-  zennUrl?: string;
-
-  /** Zennでのいいね数（移行時の記録用） */
-  zennLikes?: number;
-
   /** 表示順序（小さいほど先に表示、未指定の場合は公開日順） */
   order?: number;
 }

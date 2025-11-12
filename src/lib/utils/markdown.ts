@@ -168,8 +168,6 @@ export async function parseBlogMarkdown(markdown: string): Promise<BlogData> {
     updatedAt: metadata.updatedAt,
     thumbnail: metadata.thumbnail,
     published: metadata.published !== false, // デフォルトはtrue
-    zennUrl: metadata.zennUrl,
-    zennLikes: metadata.zennLikes,
     order: metadata.order
   };
 
