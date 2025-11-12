@@ -1,5 +1,5 @@
 ---
-id: ""
+id: "migrate-yarn-from-global-to-project-based"
 title: Yarnをグローバルからproto管理に移行【Nix home-manager】
 description: ""
 publishedAt: 2025-04-16T15:00:23.270Z

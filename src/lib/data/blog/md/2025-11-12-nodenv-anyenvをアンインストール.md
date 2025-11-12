@@ -1,11 +1,13 @@
 ---
-id: ""
+id: "uninstall-nodenv-anyenv"
 title: "nodenv, anyenvをアンインストール"
 description: ""
 publishedAt: 2025-11-12T13:20:48.884Z
 preview: ""
 draft: false
-tags: []
+tags:
+  - nodenv
+  - anyenv
 ---
 
 最近のツール管理に[proto | moonrepo](https://moonrepo.dev/proto)を入れたので、これまでお世話になっていたnodenv, anyenvをアンインストールします。
