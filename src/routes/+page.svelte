@@ -1,6 +1,7 @@
 <script lang="ts">
   import { m } from "$lib/paraglide/messages";
   import SectionAboutMe from './section-about-me.svelte';
+  import SectionBlog from './section-blog.svelte';
   import SectionContact from './section-contact.svelte';
   import SectionHero from "./section-hero.svelte";
   import SectionWorks from "./section-works.svelte";
@@ -14,6 +15,8 @@
 <SectionHero />
 
 <SectionWorks />
+
+<SectionBlog />
 
 <SectionAboutMe />
 

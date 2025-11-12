@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Card from "$lib/components/ui/Card.svelte";
+	import GradientThumbnail from "$lib/components/ui/GradientThumbnail.svelte";
 	import type { Snippet } from "svelte";
 
 	type Props = {
@@ -8,20 +9,24 @@
 		href?: string;
 		isExternal?: boolean;
 		children?: Snippet;
+		// GradientThumbnail用のprops
+		gradientTitle?: string;
+		gradientTags?: string[];
+		gradientId?: string;
 		// Cardコンポーネントが受け取る残りのプロパティ
 		variant?: "default" | "elevated" | "bordered" | "gradient";
 		hover?: boolean;
 	};
 
-	const noImagePlaceholder =
-	'https://placehold.jp/eeeeee/cccccc/240x180.png?text=No%20Image'
-
 	const {
-		thumbnailUrl = noImagePlaceholder,
+		thumbnailUrl,
 		thumbnailAlt = 'No Image',
 		href,
 		isExternal = false,
 		children,
+		gradientTitle,
+		gradientTags,
+		gradientId,
 		...restProps
 	}: Props = $props();
 </script>
@@ -30,7 +35,11 @@
 	{#if href}
 		<a {href} class="card-link" target={isExternal ? '_blank' : undefined} rel={isExternal ? 'noopener noreferrer' : undefined}>
 			<div class="thumbnail-wrapper">
-				<img src={thumbnailUrl} alt={thumbnailAlt} class="thumbnail-image" />
+				{#if thumbnailUrl}
+					<img src={thumbnailUrl} alt={thumbnailAlt} class="thumbnail-image" />
+				{:else if gradientTitle && gradientTags && gradientId}
+					<GradientThumbnail title={gradientTitle} tags={gradientTags} id={gradientId} />
+				{/if}
 			</div>
 			<div class="content-wrapper">
 				{@render children?.()}
@@ -38,7 +47,11 @@
 		</a>
 	{:else}
 		<div class="thumbnail-wrapper">
-			<img src={thumbnailUrl} alt={thumbnailAlt} class="thumbnail-image" />
+			{#if thumbnailUrl}
+				<img src={thumbnailUrl} alt={thumbnailAlt} class="thumbnail-image" />
+			{:else if gradientTitle && gradientTags && gradientId}
+				<GradientThumbnail title={gradientTitle} tags={gradientTags} id={gradientId} />
+			{/if}
 		</div>
 		<div class="content-wrapper">
 			{@render children?.()}
