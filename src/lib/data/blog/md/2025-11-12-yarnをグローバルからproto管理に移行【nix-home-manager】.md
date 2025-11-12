@@ -9,19 +9,6 @@ tags:
   - Yarn
   - Proto
 ---
----
-title: "Yarnをグローバルからproto管理に移行【Nix home-manager】"
-emoji: "☃️"
-type: "tech"
-topics:
-
-- "yarn"
-- "nix"
-- "proto"
-published: true
-published_at: "2025-04-16 15:00"
-
----
 
 最近nixや[proto](https://moonrepo.dev/proto)をさわったりhomebrewについて再考したり開発環境を見直している。そんな中あるプロジェクトで使っているyarnが気になった。あれ、このyarn、どこで管理してるっけ？
 
