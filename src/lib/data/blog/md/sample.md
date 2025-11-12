@@ -6,7 +6,6 @@ tags:
   - 'SvelteKit'
   - 'TypeScript'
   - 'Markdown'
-  - 'ブログ'
 publishedAt: '2025-01-12'
 draft: false
 order: 1
