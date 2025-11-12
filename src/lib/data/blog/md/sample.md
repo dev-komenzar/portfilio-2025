@@ -1,11 +1,7 @@
 ---
 id: 'sample-technical-article'
-title:
-  ja: 'SvelteKitで技術ブログを作った話'
-  en: 'Building a Technical Blog with SvelteKit'
-description:
-  ja: 'SvelteKitとマークダウンを使って技術ブログを構築した際の設計と実装について解説します。'
-  en: 'Explaining the design and implementation of building a technical blog using SvelteKit and Markdown.'
+title: 'SvelteKitで技術ブログを作った話'
+description: 'SvelteKitとマークダウンを使って技術ブログを構築した際の設計と実装について解説します。'
 tags:
   - 'SvelteKit'
   - 'TypeScript'
@@ -39,9 +35,8 @@ SvelteKitを選択した理由は以下の通りです：
 ```yaml
 ---
 id: 'article-slug'
-title:
-  ja: '記事タイトル'
-  en: 'Article Title'
+title: '記事タイトル'
+description: '記事の説明'
 tags:
   - 'Tag1'
   - 'Tag2'
@@ -68,7 +63,8 @@ TypeScriptで厳密な型定義を行い、型安全性を確保しています�
 ```typescript
 export interface BlogMetadata {
   id: string;
-  title: Record<'ja' | 'en', string>;
+  title: string;
+  description: string;
   tags: string[];
   publishedAt: string;
   // ...

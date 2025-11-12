@@ -1,11 +1,9 @@
 <script lang="ts">
 	import { asset, resolve } from "$app/paths";
 	import ThumbnailCard from "$lib/components/ui/ThumbnailCard.svelte";
-	import { getLocale } from "$lib/paraglide/runtime";
 	import type { PageData } from './$types';
 
 	export let data: PageData;
-	const lang = getLocale();
 
 	// タグのフィルタリング用
 	let selectedTag: string | null = null;
@@ -22,7 +20,7 @@
 
 	function formatDate(dateString: string): string {
 		const date = new Date(dateString);
-		return new Intl.DateTimeFormat(lang, {
+		return new Intl.DateTimeFormat('ja', {
 			year: 'numeric',
 			month: 'long',
 			day: 'numeric'
@@ -77,8 +75,8 @@
 							variant="bordered"
 							hover
 							{thumbnailUrl}
-							thumbnailAlt={title[lang]}
-							gradientTitle={title[lang]}
+							thumbnailAlt={title}
+							gradientTitle={title}
 							gradientTags={tags}
 							gradientId={id}
 							href={resolve(`/blog/${id}`)}
@@ -87,8 +85,8 @@
 								<time class="blog-date" datetime={publishedAt}>
 									{formatDate(publishedAt)}
 								</time>
-								<h2 class="blog-title">{title[lang]}</h2>
-								<p class="blog-description">{description[lang]}</p>
+								<h2 class="blog-title">{title}</h2>
+								<p class="blog-description">{description}</p>
 								<div class="blog-tags">
 									{#each tags as tag (tag)}
 										<span class="tag">{tag}</span>

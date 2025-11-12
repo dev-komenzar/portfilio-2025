@@ -6,11 +6,11 @@ export interface BlogMetadata {
   /** 記事の一意のID（URLスラッグとしても使用） */
   id: string;
 
-  /** 記事のタイトル（多言語対応） */
-  title: Record<'ja' | 'en', string>;
+  /** 記事のタイトル */
+  title: string;
 
-  /** 記事の説明（多言語対応） */
-  description: Record<'ja' | 'en', string>;
+  /** 記事の説明 */
+  description: string;
 
   /** 記事で扱う技術・トピックのタグ */
   tags: string[];

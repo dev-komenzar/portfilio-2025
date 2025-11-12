@@ -1,17 +1,14 @@
 <script lang="ts">
 import { asset, resolve } from '$app/paths';
 import ThumbnailCard from '$lib/components/ui/ThumbnailCard.svelte';
-import { getLocale } from '$lib/paraglide/runtime.js';
 import { getBlogs } from '$lib/data/blog';
-
-const lang = getLocale();
 
 // 最新3件の記事を取得
 const blogsPromise = getBlogs({ publishedOnly: true }, 'newest');
 
 function formatDate(dateString: string): string {
 	const date = new Date(dateString);
-	return new Intl.DateTimeFormat(lang, {
+	return new Intl.DateTimeFormat('ja', {
 		year: 'numeric',
 		month: 'short',
 		day: 'numeric'
@@ -40,8 +37,8 @@ function formatDate(dateString: string): string {
 								variant="bordered"
 								hover
 								{thumbnailUrl}
-								thumbnailAlt={title[lang]}
-								gradientTitle={title[lang]}
+								thumbnailAlt={title}
+								gradientTitle={title}
 								gradientTags={tags}
 								gradientId={id}
 								href={resolve(`/blog/${id}`)}
@@ -50,8 +47,8 @@ function formatDate(dateString: string): string {
 									<time class="blog-date" datetime={publishedAt}>
 										{formatDate(publishedAt)}
 									</time>
-									<h3 class="blog-title">{title[lang]}</h3>
-									<p class="blog-description">{description[lang]}</p>
+									<h3 class="blog-title">{title}</h3>
+									<p class="blog-description">{description}</p>
 									<div class="blog-tags">
 										{#each tags.slice(0, 3) as tag (tag)}
 											<span class="tag">{tag}</span>

@@ -1,17 +1,15 @@
 <script lang="ts">
 	import { asset, resolve } from "$app/paths";
 	import ThumbnailCard from "$lib/components/ui/ThumbnailCard.svelte";
-	import { getLocale } from "$lib/paraglide/runtime";
 	import type { PageData } from './$types';
 
 	export let data: PageData;
-	const lang = getLocale();
 
 	const { blog, relatedBlogs } = data;
 
 	function formatDate(dateString: string): string {
 		const date = new Date(dateString);
-		return new Intl.DateTimeFormat(lang, {
+		return new Intl.DateTimeFormat('ja', {
 			year: 'numeric',
 			month: 'long',
 			day: 'numeric'
@@ -20,10 +18,10 @@
 </script>
 
 <svelte:head>
-	<title>{blog.metadata.title[lang]}</title>
-	<meta name="description" content={blog.metadata.description[lang]} />
-	<meta property="og:title" content={blog.metadata.title[lang]} />
-	<meta property="og:description" content={blog.metadata.description[lang]} />
+	<title>{blog.metadata.title}</title>
+	<meta name="description" content={blog.metadata.description} />
+	<meta property="og:title" content={blog.metadata.title} />
+	<meta property="og:description" content={blog.metadata.description} />
 	{#if blog.metadata.thumbnail}
 		<meta property="og:image" content={asset(blog.metadata.thumbnail)} />
 	{/if}
@@ -49,8 +47,8 @@
 					</span>
 				{/if}
 			</div>
-			<h1 class="article-title">{blog.metadata.title[lang]}</h1>
-			<p class="article-description">{blog.metadata.description[lang]}</p>
+			<h1 class="article-title">{blog.metadata.title}</h1>
+			<p class="article-description">{blog.metadata.description}</p>
 			<div class="article-tags">
 				{#each blog.metadata.tags as tag (tag)}
 					<span class="tag">{tag}</span>
@@ -63,7 +61,7 @@
 			<div class="article-thumbnail">
 				<img
 					src={asset(blog.metadata.thumbnail)}
-					alt={blog.metadata.title[lang]}
+					alt={blog.metadata.title}
 				/>
 			</div>
 		{/if}
@@ -85,15 +83,15 @@
 							variant="bordered"
 							hover
 							{thumbnailUrl}
-							thumbnailAlt={title[lang]}
-							gradientTitle={title[lang]}
+							thumbnailAlt={title}
+							gradientTitle={title}
 							gradientTags={tags}
 							gradientId={id}
 							href={resolve(`/blog/${id}`)}
 						>
 							<div class="related-content">
-								<h3 class="related-blog-title">{title[lang]}</h3>
-								<p class="related-blog-description">{description[lang]}</p>
+								<h3 class="related-blog-title">{title}</h3>
+								<p class="related-blog-description">{description}</p>
 							</div>
 						</ThumbnailCard>
 					{/each}

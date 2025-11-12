@@ -161,8 +161,8 @@ export async function parseBlogMarkdown(markdown: string): Promise<BlogData> {
   // blogMetadataの型に合わせる
   const blogMetadata: BlogMetadata = {
     id: metadata.id || '',
-    title: metadata.title || { ja: '', en: '' },
-    description: metadata.description || { ja: '', en: '' },
+    title: metadata.title || '',
+    description: metadata.description || '',
     tags: metadata.tags || [],
     publishedAt: metadata.publishedAt || '',
     updatedAt: metadata.updatedAt,
@@ -192,9 +192,9 @@ export function sortBlogs(
       case 'oldest':
         return new Date(a.metadata.publishedAt).getTime() - new Date(b.metadata.publishedAt).getTime();
       case 'title-asc':
-        return a.metadata.title.ja.localeCompare(b.metadata.title.ja);
+        return a.metadata.title.localeCompare(b.metadata.title);
       case 'title-desc':
-        return b.metadata.title.ja.localeCompare(a.metadata.title.ja);
+        return b.metadata.title.localeCompare(a.metadata.title);
       case 'order':
         // orderが指定されている場合はそれを使用、なければ公開日順
         if (a.metadata.order !== undefined && b.metadata.order !== undefined) {
