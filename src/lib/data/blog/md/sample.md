@@ -12,7 +12,6 @@ tags:
   - 'Markdown'
   - 'ブログ'
 publishedAt: '2025-01-12'
-thumbnail: '/images/blog/sample-thumbnail.png'
 published: true
 order: 1
 ---
