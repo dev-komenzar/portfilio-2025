@@ -12,7 +12,7 @@ export async function getWorks(
   sortOption?: WorkSortOption
 ): Promise<WorkData[]> {
   // マークダウンファイルを読み込む
-  const modules = import.meta.glob('./md/*.md', { as: 'raw', eager: true });
+  const modules = import.meta.glob('./md/*.md', { query: '?raw', import: 'default', eager: true });
   const works = await Promise.all(Object.entries(modules).map(([, content]) => {
     return parseWorkMarkdown(content as string);
   }));
@@ -26,7 +26,7 @@ export async function getWorks(
  * すべてのワークのslugを取得する関数
  */
 export async function getAllWorkSlugs(): Promise<string[]> {
-  const modules = import.meta.glob('./md/*.md', { as: 'raw', eager: true });
+  const modules = import.meta.glob('./md/*.md', { query: '?raw', import: 'default', eager: true });
   const slugs = Object.keys(modules).map(path => {
     const match = path.match(/\/md\/(.*)\.md$/);
     return match ? match[1] : '';

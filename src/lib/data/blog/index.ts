@@ -13,7 +13,7 @@ export async function getBlogs(
   sortOption?: BlogSortOption
 ): Promise<BlogData[]> {
   // マークダウンファイルを読み込む
-  const modules = import.meta.glob('./md/*.md', { as: 'raw', eager: true });
+  const modules = import.meta.glob('./md/*.md', { query: '?raw', import: 'default', eager: true });
   const blogs = await Promise.all(Object.entries(modules).map(([, content]) => {
     return parseBlogMarkdown(content as string);
   }));
@@ -27,7 +27,7 @@ export async function getBlogs(
  * すべてのブログ記事のslugを取得する関数
  */
 export async function getAllBlogSlugs(): Promise<string[]> {
-  const modules = import.meta.glob('./md/*.md', { as: 'raw', eager: true });
+  const modules = import.meta.glob('./md/*.md', { query: '?raw', import: 'default', eager: true });
   const slugs = Object.keys(modules).map(path => {
     const match = path.match(/\/md\/(.*)\.md$/);
     return match ? match[1] : '';
@@ -44,10 +44,14 @@ export async function getAllBlogSlugs(): Promise<string[]> {
  */
 export async function getBlogBySlug(slug: string): Promise<BlogData | null> {
   try {
-    // 動的にモジュールをインポート
-    const module = await import(`./md/${slug}.md?raw`);
-    const content = await parseBlogMarkdown(module.default);
-    return content;
+    // すべてのブログを取得してからフィルタリング
+    const allBlogs = await getBlogs();
+    const blog = allBlogs.find(b => b.metadata.id === slug);
+    if (!blog) {
+      console.error(`Blog post with slug "${slug}" not found.`);
+      return null;
+    }
+    return blog;
   } catch (e) {
     console.error(`Blog post with slug "${slug}" not found.`, e);
     return null;
